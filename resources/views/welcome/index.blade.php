@@ -20,15 +20,23 @@
                             {{ \Illuminate\Support\Facades\Session::get('msg') }}
                         </div>
                     @endif
+
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error )
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     <div class="col-xs-12 col-md-6 col-lg-7">
                         <div class="page-title">
-                            @foreach($users as $user)
                             <h2>{{ $user->name }} <span class="primary"></span> <span class="title-bg">About</span></h2>
                             <p>{{ $user->excerpt }}</p>
                             <p>{{ $user->description }}</p>
                         </div>
                     </div>
-                    @endforeach
                 </div> <!-- /.row -->
             </div> <!-- /.container -->
 

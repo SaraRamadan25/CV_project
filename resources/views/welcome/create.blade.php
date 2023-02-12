@@ -29,14 +29,20 @@
         <div class="col-12 col-md-9"><input type="date" id="text-input" name="date_of_birth" placeholder="date_of_birth" class="form-control"></div>
     </div>
 
-    <div class="row form-group">
-        <div class="col col-md-3"><label for="text-input" class=" form-control-label">date_of_birth</label></div>
-        <div class="col-12 col-md-9"><input type="date" id="text-input" name="date_of_birth" placeholder="date_of_birth" class="form-control"></div>
-    </div>
+
+   {{-- <div class="form-group">
+        <label for="speeches">Speeches</label>
+        <select multiple class="form-control" name="speeches">
+            @foreach($speeches as $speech)
+                <option>{{ $speech }}</option>
+            @endforeach
+
+        </select>
+    </div>--}}
 
     <div class="form-group">
-        <label for="languages">Experiences</label>
-        <select multiple class="form-control" name="expert_in">
+        <label for="Experiences">Experiences</label>
+        <select multiple class="form-control" name="expert_in[]">
             @foreach($experiences as $experience)
             <option>{{ $experience }}</option>
             @endforeach
@@ -45,19 +51,9 @@
     </div>
 
 
-    <div class="form-group">
-        <label for="experience">experiences</label>
-        <select multiple class="form-control" name="language">
-            @foreach($languages as $language)
-                <option>{{ $language }}</option>
-            @endforeach
-
-        </select>
-    </div>
-
 
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary btn-sm" name="add">
+        <button type="submit" class="btn btn-primary btn-sm" >
             <i class="fa fa-dot-circle-o"></i> Add
         </button>
 

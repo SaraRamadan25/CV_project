@@ -21,10 +21,10 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'date_of_birth'=>fake()->time(),
+            'date_of_birth'=>fake()->date(),
             'description'=>fake()->paragraph(),
-            'language'=>fake()->sentence(),
-            'expert_in'=>fake()->words(2,true),
+            'expert_in'=>fake()->shuffleArray(),
+/*            'speeches'=>fake()->shuffleArray,*/
             'freelance'=>'Available',
             'excerpt'=>fake()->sentence(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',

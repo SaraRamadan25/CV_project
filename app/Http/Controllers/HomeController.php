@@ -8,20 +8,19 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
-{
-    $users = User::all();
-    $languages =['Arabic','English','German','Spanish','French'];
-    $experiences =['UI/UX','Frontend','Backend','Datascience','Data Analysis'];
-    return view('welcome.index',compact('users','languages','experiences'));
-}
+    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        $user = User::query()->orderBy('created_at', 'desc')->first();
+        $speeches =['Arabic','English','German','Spanish','French'];
+        $experiences =['UI/UX','Frontend','Backend','Datascience','Data Analysis'];
+        return view('welcome.index',compact('user','speeches','experiences'));
+    }
+
 public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
 {
-    $users = User::all();
-    $languages =['Arabic','English','German','Spanish','French'];
+    $speeches =['Arabic','English','German','Spanish','French'];
     $experiences =['UI/UX','Frontend','Backend','Datascience','Data Analysis'];
-    return view('welcome.create',compact('users','languages','experiences'));
-    var_dump(\request()->all());
+    return view('welcome.create',compact('speeches','experiences'));
 }
 
 public function store(WelcomeRequest $request): \Illuminate\Http\RedirectResponse
@@ -33,18 +32,21 @@ public function store(WelcomeRequest $request): \Illuminate\Http\RedirectRespons
         'email'=>$request->email,
         'password'=>$request->password,
         'date_of_birth'=>$request->date_of_birth,
-        'language'=>$request->language,
+/*        'speeches'=>$request->speeches,*/
         'expert_in'=>$request->expert_in
 
     ]);
+    var_dump($request->all());
     return redirect()->back()->with('msg','user added successfully');
-}
 
+}
 
     public function edit($id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         $user = User::findOrFail($id);
-        return view ('welcome.edit',compact ('user'));
+        $languages =['Arabic','English','German','Spanish','French'];
+        $experiences =['UI/UX','Frontend','Backend','Datascience','Data Analysis'];
+        return view('welcome.create',compact('languages','experiences'));
 
     }
     public function update(WelcomeRequest $request,$id): \Illuminate\Http\RedirectResponse
@@ -52,8 +54,13 @@ public function store(WelcomeRequest $request): \Illuminate\Http\RedirectRespons
         $user = User::findOrFail($id);
         $user->update([
             'name'=>$request->name,
-            'excerpt'=>$request->role,
+            'excerpt'=>$request->excerpt,
             'description'=>$request->description,
+            'email'=>$request->email,
+            'password'=>$request->password,
+            'date_of_birth'=>$request->date_of_birth,
+        /* 'speeches'=>$request->speeches,*/
+            'expert_in'=>$request->expert_in
         ]);
         return redirect()->route('welcome.index')->with('msg','user updated successfully');
     }

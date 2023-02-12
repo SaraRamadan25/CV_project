@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->time('date_of_birth');
-            $table->text('language');
-            $table->text('expert_in');
+            $table->date('date_of_birth');
+/*            $table->json('speeches'); //was languages //but there is a conflict !*/
+            $table->json('expert_in');
             $table->enum('freelance',['Available','Not Available']);
             $table->text('description');
             $table->text('excerpt');

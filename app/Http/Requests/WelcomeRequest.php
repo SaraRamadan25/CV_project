@@ -30,7 +30,7 @@ class WelcomeRequest extends FormRequest
             'email'=>'required|email',
             'password'=>'required|min:4',
             'date_of_birth'=>'required',
-            'languages'=>'required',
+/*            'speeches'=>'required',*/
             'expert_in'=>'required'
         ];
     }

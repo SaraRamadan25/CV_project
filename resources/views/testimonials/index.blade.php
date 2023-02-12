@@ -16,6 +16,17 @@
                             {{ \Illuminate\Support\Facades\Session::get('msg') }}
                         </div>
                     @endif
+
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error )
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                     <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
                         <div class="page-title text-center">
                             <h2>My <span class="primary">clients</span><span class="title-bg">Speech</span></h2>
