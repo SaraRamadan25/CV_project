@@ -2,174 +2,123 @@
 
 <x-header />
 
+{{--@foreach($educations as $education)
+    <h5>{{ $education->name }}</h5>
+    <span>{{ $education->duratoin }}</span>
+    <p> {{ $education->description }} <br> </p>
+
+    @foreach($experiences as $experience)
+        <h5>{{ $experience->name }}</h5>
+        <span>{{ $experience->duration }}</span>
+        <p> {{ $experience->description }}<br></p>--}}
+
+
 <main class="site-wrapper">
-  <div class="pt-table">
-    <div class="pt-tablecell page-resume relative">
-      <!-- .close -->
-      <a href="./" class="page-close"><i class="tf-ion-close"></i></a>
-      <!-- /.close -->
+    <div class="pt-table">
+        <div class="pt-tablecell page-resume relative">
+            <!-- .close -->
+            <a href="./" class="page-close"><i class="tf-ion-close"></i></a>
+            <!-- /.close -->
 
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-            <div class="page-title text-center">
-              <h2>My <span class="primary">history</span> <span class="title-bg">Resume</span></h2>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                laoreet dolore magna aliquam erat volutpat.</p>
-            </div>
-          </div>
-        </div> <!-- /.row -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+                        <div class="page-title text-center">
+                            <h2>My <span class="primary">history</span> <span class="title-bg">Resume</span></h2>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                                laoreet dolore magna aliquam erat volutpat.</p>
+                        </div>
+                    </div>
+                </div> <!-- /.row -->
 
-        <div class="row">
-          <div class="col-xs-12 col-sm-6">
-            <div class="history-block">
-              <div class="section-title light clear">
-                <h3>Education</h3>
-              </div>
-              <!-- /.section-title -->
-              <div class="history-scroller">
-                <div class="history-item">
-                  <div class="history-icon">
-                    <span class="history-hex"></span>
-                    <i class="tf-documents5"></i>
-                  </div>
-                  <div class="history-text">
-                    <h5>Merin Land College</h5>
-                    <span>2012 - 2014</span>
-                  </div>
-                </div>
-                <!-- /.history-item -->
-                <div class="history-item">
-                  <div class="history-icon">
-                    <span class="history-hex"></span>
-                    <i class="tf-documents5"></i>
-                  </div>
-                  <div class="history-text">
-                    <h5>Merin Land College</h5>
-                    <span>2012 - 2014</span>
-                    <p>Claritas est etiam processus dynamicus, qui <br> sequitur mutationem consuetudium lectorum.</p>
-                  </div>
-                </div>
-                <!-- /.history-item -->
-                <div class="history-item">
-                  <div class="history-icon">
-                    <span class="history-hex"></span>
-                    <i class="tf-documents5"></i>
-                  </div>
-                  <div class="history-text">
-                    <h5>Merin Land College</h5>
-                    <span>2012 - 2014</span>
-                  </div>
-                </div>
-                <!-- /.history-item -->
-                <div class="history-item">
-                  <div class="history-icon">
-                    <span class="history-hex"></span>
-                    <i class="tf-documents5"></i>
-                  </div>
-                  <div class="history-text">
-                    <h5>Merin Land College</h5>
-                    <span>2012 - 2014</span>
-                  </div>
-                </div>
-                <!-- /.history-item -->
-                <div class="history-item">
-                  <div class="history-icon">
-                    <span class="history-hex"></span>
-                    <i class="tf-documents5"></i>
-                  </div>
-                  <div class="history-text">
-                    <h5>Merin Land College</h5>
-                    <span>2012 - 2014</span>
-                  </div>
-                </div>
-                <!-- /.history-item -->
-              </div>
-            </div> <!-- /.history-block -->
-          </div> <!-- /.col -->
-          <div class="col-xs-12 col-sm-6">
-            <div class="history-block">
-              <div class="section-title light clear">
-                <h3>Experiences</h3>
-              </div>
-              <!-- /.section-title -->
-              <div class="history-scroller">
-                <div class="history-item">
-                  <div class="history-icon">
-                    <span class="history-hex"></span>
-                    <i class="tf-documents5"></i>
-                  </div>
-                  <div class="history-text">
-                    <h5>Merin Land College</h5>
-                    <span>2012 - 2014</span>
-                  </div>
-                </div>
-                <!-- /.history-item -->
-                <div class="history-item">
-                  <div class="history-icon">
-                    <span class="history-hex"></span>
-                    <i class="tf-documents5"></i>
-                  </div>
-                  <div class="history-text">
-                    <h5>Merin Land College</h5>
-                    <span>2012 - 2014</span>
-                    <p>Claritas est etiam processus dynamicus, qui <br> sequitur mutationem consuetudium lectorum.</p>
-                  </div>
-                </div>
-                <!-- /.history-item -->
-                <div class="history-item">
-                  <div class="history-icon">
-                    <span class="history-hex"></span>
-                    <i class="tf-documents5"></i>
-                  </div>
-                  <div class="history-text">
-                    <h5>Merin Land College</h5>
-                    <span>2012 - 2014</span>
-                  </div>
-                </div>
-                <!-- /.history-item -->
-                <div class="history-item">
-                  <div class="history-icon">
-                    <span class="history-hex"></span>
-                    <i class="tf-documents5"></i>
-                  </div>
-                  <div class="history-text">
-                    <h5>Merin Land College</h5>
-                    <span>2012 - 2014</span>
-                  </div>
-                </div>
-                <!-- /.history-item -->
-                <div class="history-item">
-                  <div class="history-icon">
-                    <span class="history-hex"></span>
-                    <i class="tf-documents5"></i>
-                  </div>
-                  <div class="history-text">
-                    <h5>Merin Land College</h5>
-                    <span>2012 - 2014</span>
-                  </div>
-                </div>
-                <!-- /.history-item -->
-              </div>
-            </div> <!-- /.history-block -->
-          </div> <!-- /.col -->
-        </div> <!-- /.row -->
-      </div> <!-- /.container -->
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="history-block">
+                            <div class="section-title light clear">
+                                <h3>Education</h3>
+                            </div>
+                            <!-- /.section-title -->
+                            <div class="history-scroller">
+                                <div class="history-item">
+                                    <div class="history-icon">
+                                        <span class="history-hex"></span>
+                                        <i class="tf-documents5"></i>
+                                    </div>
+                                    <div class="history-text">
+                                        <h5>Merin Land College</h5>
+                                        <span>2012 - 2014</span>
+                                    </div>
+                                </div>
+                                <!-- /.history-item -->
+                                <div class="history-item">
+                                    <div class="history-icon">
+                                        <span class="history-hex"></span>
+                                        <i class="tf-documents5"></i>
+                                    </div>
+                                    @foreach($educations as $education)
+                                    <div class="history-text">
+                                        <h5>{{ $education->name }}</h5>
+                                        <span>{{ \Carbon\Carbon::parse($education->duration)->format('d-m-Y')}}</span>
+                                        <p> {{ $education->description }}<br></p>
+                                    </div>
+                                </div>
+                                @endforeach
 
-      <nav class="page-nav clear">
-  <div class="container">
-    <div class="flex flex-middle space-between">
-      <span class="prev-page"><a href="services" class="link">&larr; Prev Page</a></span>
-      <span class="copyright">Copyright &copy; 2021, Designed &amp; Developed by <a href="https://themefisher.com/">Themefisher</a>.</span>
-      <span class="next-page"><a href="work" class="link">Next Page &rarr;</a></span>
-    </div>
-  </div>
-  <!-- /.page-nav -->
-</nav>
-      <!-- /.container -->
 
-    </div> <!-- /.pt-tablecell -->
-  </div> <!-- /.pt-table -->
+                            </div>
+                        </div> <!-- /.history-block -->
+                    </div> <!-- /.col -->
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="history-block">
+                            <div class="section-title light clear">
+                                <h3>Experiences</h3>
+                            </div>
+                            <!-- /.section-title -->
+                            <div class="history-scroller">
+                                <div class="history-item">
+                                    <div class="history-icon">
+                                        <span class="history-hex"></span>
+                                        <i class="tf-documents5"></i>
+                                    </div>
+                                    <div class="history-text">
+                                        <h5>Merin Land College</h5>
+                                        <span>2012 - 2014</span>
+                                    </div>
+                                </div>
+                                <!-- /.history-item -->
+                                @foreach($experiences as $experience)
+                                <div class="history-item">
+                                    <div class="history-icon">
+                                        <span class="history-hex"></span>
+                                        <i class="tf-documents5"></i>
+                                    </div>
+                                    <div class="history-text">
+                                        <h5>{{ $experience->name }}</h5>
+                                        <span>{{ \Carbon\Carbon::parse($experience->duration)->format('d-m-Y')}}</span>
+                                        <p> {{ $experience->description }}<br></p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div> <!-- /.history-block -->
+                    </div> <!-- /.col -->
+                </div> <!-- /.row -->
+            </div> <!-- /.container -->
+
+            <nav class="page-nav clear">
+                <div class="container">
+                    <div class="flex flex-middle space-between">
+                        <span class="prev-page"><a href="services.html" class="link">&larr; Prev Page</a></span>
+                        <span class="copyright">Copyright &copy; 2021, Designed &amp; Developed by <a href="https://themefisher.com/">Themefisher</a>.</span>
+                        <span class="next-page"><a href="works.html" class="link">Next Page &rarr;</a></span>
+                    </div>
+                </div>
+                <!-- /.page-nav -->
+            </nav>
+            <!-- /.container -->
+
+        </div> <!-- /.pt-tablecell -->
+    </div> <!-- /.pt-table -->
 </main> <!-- /.site-wrapper -->
 
 

@@ -18,9 +18,9 @@ class CreateEducationUserTable extends Migration
         Schema::create('education_user', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('user');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('education_id');
-            $table->foreign('education_id')->references('id')->on('education');
+            $table->foreign('education_id')->references('id')->on('educations');
         });
 
         Schema::enableForeignKeyConstraints();

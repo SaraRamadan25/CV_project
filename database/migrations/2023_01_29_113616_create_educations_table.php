@@ -15,11 +15,12 @@ class CreateEducationsTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('education', function (Blueprint $table) {
+        Schema::create('educations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('duration');
             $table->text('description');
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();
@@ -32,6 +33,6 @@ class CreateEducationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('education');
+        Schema::dropIfExists('educations');
     }
 }

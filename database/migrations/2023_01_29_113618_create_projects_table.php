@@ -15,7 +15,7 @@ class CreateProjectsTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('project', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('image');
@@ -23,7 +23,8 @@ class CreateProjectsTable extends Migration
             $table->foreign('user_id')->references('id')->on('user');
             $table->string('type');
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('category');
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();
@@ -36,6 +37,6 @@ class CreateProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project');
+        Schema::dropIfExists('projects');
     }
 }

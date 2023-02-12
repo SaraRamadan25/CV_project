@@ -20,9 +20,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->time('date_of_birth');
-            $table->text('languages');
+            $table->text('language');
             $table->text('expert_in');
-            $table->boolean('freelance');
+            $table->enum('freelance',['Available','Not Available']);
             $table->text('description');
             $table->text('excerpt');
             $table->rememberToken();

@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ResumeController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\WorkController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,33 +20,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/index',function (){
+
+Route::get('/index', function () {
     return view('index');
 });
-Route::get('/testimonials',function (){
-    return view('testimonials');
-});
 
-Route::get('/welcome2',function (){
-    return view('welcome2');
-});
-Route::get('/about',function (){
-    return view('about');
-});
-Route::get('/contact',function (){
-    return view('contact');
-});
-Route::get('/services',function (){
-    return view('services');
-});
-Route::get('/resume',function (){
-    return view('resume');
-});
-Route::get('/work',function (){
-    return view('work');
-});
+Route::resource('/welcome',HomeController::class);
+Route::resource('/about',AboutController::class);
+Route::resource('/service',ServiceController::class);
+Route::resource('/resume',ResumeController::class);
+Route::resource('/work',WorkController::class);
+Route::resource('/testimonials',TestimonialController::class);
+
+
+Route::get('/contact',[ContactController::class,'create']);
+Route::post('/contact',[ContactController::class,'store']);
+
+
+
+
+
+
+
+
 
 

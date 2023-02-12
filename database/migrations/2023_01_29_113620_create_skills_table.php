@@ -15,12 +15,13 @@ class CreateSkillsTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('skill', function (Blueprint $table) {
+        Schema::create('skills', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->double('percentage');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('user');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();
@@ -33,6 +34,6 @@ class CreateSkillsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skill');
+        Schema::dropIfExists('skills');
     }
 }

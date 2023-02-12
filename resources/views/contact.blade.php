@@ -84,11 +84,12 @@
                 <span class="bar-primary"></span>
               </div>
 
-              <form id="contact-form" class="row contact-form no-gutter" action="#" method="post">
+              <form id="contact-form" class="row contact-form no-gutter" action="/contact" method="post">
+                  @csrf
                 <div class="col-xs-12 col-sm-6">
                   <div class="input-field name">
                     <span class="input-icon" id="name"><i class="tf-profile-male"></i></span>
-                    <input type="text" class="form-control" placeholder="Enter your name" required>
+                    <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
                   </div>
                 </div> <!-- ./col- -->
                 <div class="col-xs-12 col-sm-6">
@@ -100,7 +101,7 @@
                 <div class="col-xs-12 col-sm-12">
                   <div class="input-field">
                     <span class="input-icon" id="subject"><i class="tf-pricetags"></i></span>
-                    <input type="text" class="form-control" name="subject" placeholder="Enter the discussion title" required>
+                    <input type="text" class="form-control" name="title" placeholder="Enter the discussion title" required>
                   </div>
                 </div> <!-- ./col- -->
                 <div class="col-xs-12 col-sm-12">

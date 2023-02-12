@@ -15,12 +15,13 @@ class CreateContactsTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('contact', function (Blueprint $table) {
+        Schema::create('contacts', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('email');
             $table->string('title');
             $table->text('message');
-            $table->text('social_links');
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();
@@ -33,6 +34,6 @@ class CreateContactsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contact');
+        Schema::dropIfExists('contacts');
     }
 }

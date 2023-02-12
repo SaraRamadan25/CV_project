@@ -53,7 +53,7 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <a href="welcome2" class="hex-content">
+                                <a href="{{ route('welcome.index') }}" class="hex-content">
                   <span class="hex-content-inner">
                     <span class="icon">
                       <i class="tf-dial"></i>
@@ -103,7 +103,7 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <a href="services" class="hex-content">
+                                <a href="service" class="hex-content">
                   <span class="hex-content-inner">
                     <span class="icon">
                       <i class="tf-tools-2"></i>
@@ -175,7 +175,7 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <a href="testimonials" class="hex-content">
+                                <a href="testimonial" class="hex-content">
                   <span class="hex-content-inner">
                     <span class="icon">
                       <i class="tf-chat"></i>

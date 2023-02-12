@@ -6,7 +6,7 @@
     <div class="pt-table">
         <div class="pt-tablecell page-welcome relative">
             <!-- .close -->
-            <a href="./" class="page-close"><i class="tf-ion-close"></i></a>
+            <a href=".." class="page-close"><i class="tf-ion-close"></i></a>
             <!-- /.close -->
 
             <div class="author-image-large">
@@ -15,13 +15,20 @@
 
             <div class="container">
                 <div class="row">
+                    @if(\Illuminate\Support\Facades\Session::has('msg'))
+                        <div class="alert alert-success">
+                            {{ \Illuminate\Support\Facades\Session::get('msg') }}
+                        </div>
+                    @endif
                     <div class="col-xs-12 col-md-6 col-lg-7">
                         <div class="page-title">
-                            <h2>David <span class="primary">ramon</span> <span class="title-bg">About</span></h2>
-                            <p>A product designer from England, who focuses on interactive design & A freelance designer focusing on typography & clean interfaces. Also works in dignissimos non quos Google..</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores repellendus corporis, tenetur inventore perferendis reprehenderit autem dignissimos non quos unde eveniet sapiente necessitatibus consequuntur ea ab dolore.</p>
+                            @foreach($users as $user)
+                            <h2>{{ $user->name }} <span class="primary"></span> <span class="title-bg">About</span></h2>
+                            <p>{{ $user->excerpt }}</p>
+                            <p>{{ $user->description }}</p>
                         </div>
                     </div>
+                    @endforeach
                 </div> <!-- /.row -->
             </div> <!-- /.container -->
 

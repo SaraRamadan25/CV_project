@@ -15,14 +15,15 @@ class CreateTestimonialsTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('testimonial', function (Blueprint $table) {
+        Schema::create('testimonials', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('description');
             $table->string('role');
             $table->string('image');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('user');
+            $table->unsignedBigInteger('user_id')->default(1);
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();
@@ -35,6 +36,6 @@ class CreateTestimonialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('testimonial');
+        Schema::dropIfExists('testimonials');
     }
 }

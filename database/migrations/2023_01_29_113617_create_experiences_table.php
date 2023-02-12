@@ -15,11 +15,12 @@ class CreateExperiencesTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('experience', function (Blueprint $table) {
+        Schema::create('experiences', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('duration');
             $table->text('description');
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();
@@ -32,6 +33,6 @@ class CreateExperiencesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('experience');
+        Schema::dropIfExists('experiences');
     }
 }

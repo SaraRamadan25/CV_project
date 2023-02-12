@@ -15,9 +15,10 @@ class CreateCategoriesTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();
@@ -30,6 +31,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category');
+        Schema::dropIfExists('categories');
     }
 }

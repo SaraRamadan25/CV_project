@@ -8,12 +8,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Experience extends Model
 {
+    use HasFactory;
+
+    protected $dates = ['duration'];
+
     protected $fillable=[
         'name',
         'duration',
         'experience'
     ];
-    use HasFactory;
     public function users(): belongsToMany
     {
         return $this->belongsToMany(User::class);
