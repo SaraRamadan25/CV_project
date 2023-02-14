@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->date('date_of_birth');
-/*            $table->json('speeches'); //was languages //but there is a conflict !*/
+            $table->json('speeches'); //was languages //but there is a conflict !
             $table->json('expert_in');
             $table->enum('freelance',['Available','Not Available']);
             $table->text('description');

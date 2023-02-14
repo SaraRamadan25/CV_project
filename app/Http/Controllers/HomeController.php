@@ -32,11 +32,10 @@ public function store(WelcomeRequest $request): \Illuminate\Http\RedirectRespons
         'email'=>$request->email,
         'password'=>$request->password,
         'date_of_birth'=>$request->date_of_birth,
-/*        'speeches'=>$request->speeches,*/
-        'expert_in'=>$request->expert_in
+        'expert_in'=>$request->expert_in,
+        'speeches'=>$request->speeches
 
     ]);
-    var_dump($request->all());
     return redirect()->back()->with('msg','user added successfully');
 
 }
@@ -44,9 +43,9 @@ public function store(WelcomeRequest $request): \Illuminate\Http\RedirectRespons
     public function edit($id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         $user = User::findOrFail($id);
-        $languages =['Arabic','English','German','Spanish','French'];
+        $speeches =['Arabic','English','German','Spanish','French'];
         $experiences =['UI/UX','Frontend','Backend','Datascience','Data Analysis'];
-        return view('welcome.create',compact('languages','experiences'));
+        return view('welcome.edit',compact('speeches','experiences','user'));
 
     }
     public function update(WelcomeRequest $request,$id): \Illuminate\Http\RedirectResponse
@@ -59,7 +58,7 @@ public function store(WelcomeRequest $request): \Illuminate\Http\RedirectRespons
             'email'=>$request->email,
             'password'=>$request->password,
             'date_of_birth'=>$request->date_of_birth,
-        /* 'speeches'=>$request->speeches,*/
+            'speeches'=>$request->speeches,
             'expert_in'=>$request->expert_in
         ]);
         return redirect()->route('welcome.index')->with('msg','user updated successfully');

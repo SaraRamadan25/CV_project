@@ -5,17 +5,32 @@
     <div class="pt-table">
         <div class="pt-tablecell page-about relative">
             <!-- .close -->
-            <a href="./" class="page-close"><i class="tf-ion-close"></i></a>
+            <a href=".." class="page-close"><i class="tf-ion-close"></i></a>
             <!-- /.close -->
 
             <div class="container">
+                @if(\Illuminate\Support\Facades\Session::has('msg'))
+                    <div class="alert alert-success">
+                        {{ \Illuminate\Support\Facades\Session::get('msg') }}
+                    </div>
+                @endif
+
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error )
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="row">
                     <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
                         <div class="page-title text-center">
                             <h2>About <span class="primary">me</span> <span class="title-bg">Name</span></h2>
-                            @foreach($users as $user)
+
                             <p> {{ $user->excerpt }}</p>
-                            @endforeach
+
                         </div>
                     </div>
 
@@ -25,18 +40,19 @@
                                 <img src='assets/theme/images/author.jpg' alt="">
                             </figure> <!-- /.author-bio -->
                             <div class="author-desc">
-                                @foreach($users as $user)
                                 <p><b>Date of birth:</b> {{ $user->date_of_birth }} </p>
-                                <p><b>Language:</b> {{ $user->languages }}</p>
-                                <p><b>Expert in:</b> {{ $user->expert_in }}</p>
+
+                                <p><b>Language:</b> {{ implode(', ', $user->speeches) }}</p>
+
+
+                                    <p> <b>Expert in:</b>{{ implode(', ', $user->expert_in) }}</p>
+
+
                                 <p><b>Freelance:</b> {{ $user->freelance }}</p>
-                                @endforeach
                             </div>
                             <!-- /.author-desc -->
                         </div> <!-- /.about-author -->
-                        @foreach($users as $user)
                         <p>{{ $user->description }}</p>
-                        @endforeach
                     </div> <!-- /.col -->
 
                     <div class="col-xs-12 col-md-6">

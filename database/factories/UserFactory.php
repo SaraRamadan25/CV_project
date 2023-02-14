@@ -24,7 +24,7 @@ class UserFactory extends Factory
             'date_of_birth'=>fake()->date(),
             'description'=>fake()->paragraph(),
             'expert_in'=>fake()->shuffleArray(),
-/*            'speeches'=>fake()->shuffleArray,*/
+            'speeches'=>fake()->shuffleArray(),
             'freelance'=>'Available',
             'excerpt'=>fake()->sentence(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',

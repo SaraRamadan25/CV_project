@@ -30,15 +30,15 @@
     </div>
 
 
-   {{-- <div class="form-group">
+   <div class="form-group">
         <label for="speeches">Speeches</label>
-        <select multiple class="form-control" name="speeches">
+        <select multiple class="form-control" name="speeches[]">
             @foreach($speeches as $speech)
                 <option>{{ $speech }}</option>
             @endforeach
 
         </select>
-    </div>--}}
+    </div>
 
     <div class="form-group">
         <label for="Experiences">Experiences</label>
@@ -49,8 +49,6 @@
 
         </select>
     </div>
-
-
 
     <div class="card-footer">
         <button type="submit" class="btn btn-primary btn-sm" >
