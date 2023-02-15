@@ -12,12 +12,11 @@ class CategoryController extends Controller
         $categories = Category::all();
         return view('projects.index',compact('categories'));
     }
-    public function show(Category $category)
+    public function show($id)
     {
-
+        $category = Category::find($id);
         $projects = $category->projects;
-        $category = Category::findOrFail($category);
 
-        return view('category.show', compact('category'));
+        return view('categories.show', compact('category', 'projects'));
     }
 }

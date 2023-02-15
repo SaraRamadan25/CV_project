@@ -21,29 +21,65 @@
                     <div class="col-xs-12">
                         <ul class="filter list-inline">
                             <li><a href="#" class="active" data-filter="*">All</a></li>
-                            <li><a href="#" data-filter=".Photoshop">{{ $category->name }}</a></li>
-                           {{-- <li><a href="#" data-filter=".Illustrator">Illustrator</a></li>
+                            <li><a href="#" data-filter=".Photoshop">Photoshop</a></li>
+                            <li><a href="#" data-filter=".Illustrator">Illustrator</a></li>
                             <li><a href="#" data-filter=".Indesign">Indesign</a></li>
-                            <li><a href="#" data-filter=".Artworks">Artworks</a></li>--}}
+                            <li><a href="#" data-filter=".Artworks">Artworks</a></li>
                         </ul>
                     </div>
                 </div>
-    @foreach($category->projects as $project)
+
                 <div class="row isotope-gutter">
                     <div class="col-xs-12 col-sm-6 col-md-4 Photoshop Illustrator">
                         <figure class="works-item">
                             <img src="images/works/1.jpg" alt="">
                             <div class="overlay"></div>
                             <figcaption class="works-inner">
-                                <h4>{{ $project->name }}</h4>
-                                <p>{{ $project->type }}</p>
+                                <h4>Project Name</h4>
+                                <p>Illustration, Digital Art</p>
                             </figcaption>
                         </figure>
                     </div>
-
-
-                    @endforeach
-
+                    <div class="col-xs-12 col-sm-6 col-md-4 Illustrator">
+                        <figure class="works-item">
+                            <img src="images/works/2.jpg" alt="">
+                            <div class="overlay"></div>
+                            <figcaption class="works-inner">
+                                <h4>Project Name</h4>
+                                <p>Illustration, Digital Art</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 Indesign Photoshop">
+                        <figure class="works-item">
+                            <img src="images/works/3.jpg" alt="">
+                            <div class="overlay"></div>
+                            <figcaption class="works-inner">
+                                <h4>Project Name</h4>
+                                <p>Illustration, Digital Art</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 Artworks Illustrator">
+                        <figure class="works-item">
+                            <img src="images/works/4.jpg" alt="">
+                            <div class="overlay"></div>
+                            <figcaption class="works-inner">
+                                <h4>Project Name</h4>
+                                <p>Illustration, Digital Art</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 Photoshop">
+                        <figure class="works-item">
+                            <img src="images/works/5.jpg" alt="">
+                            <div class="overlay"></div>
+                            <figcaption class="works-inner">
+                                <h4>Project Name</h4>
+                                <p>Illustration, Digital Art</p>
+                            </figcaption>
+                        </figure>
+                    </div>
                 </div> <!-- /.row -->
             </div> <!-- /.container -->
 
