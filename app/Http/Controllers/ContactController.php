@@ -12,9 +12,13 @@ use Illuminate\Routing\Redirector;
 
 class ContactController extends Controller
 {
+    public function index()
+    {
+        return view('contact.index');
+    }
     public function create(): Factory|View|Application
     {
-        return view('contact');
+        return view('contact.create');
     }
     public function store(Request $request): Redirector|Application|RedirectResponse
     {
@@ -32,6 +36,6 @@ class ContactController extends Controller
             'message'=> $request['message'],
 
         ]);
-        return redirect('/');
+        return redirect('/index');
     }
 }

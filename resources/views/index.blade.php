@@ -103,7 +103,7 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <a href="service" class="hex-content">
+                                <a href="{{ route('services.index') }}" class="hex-content">
                   <span class="hex-content-inner">
                     <span class="icon">
                       <i class="tf-tools-2"></i>
@@ -127,7 +127,7 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <a href="resume" class="hex-content">
+                                <a href="{{ route('resume.index') }}" class="hex-content">
                   <span class="hex-content-inner">
                     <span class="icon">
                       <i class="tf-tools"></i>
@@ -151,7 +151,7 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <a href="work" class="hex-content">
+                                <a href="{{ route('projects.index') }}" class="hex-content">
                   <span class="hex-content-inner">
                     <span class="icon">
                       <i class="tf-briefcase2"></i>
@@ -175,7 +175,7 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <a href="testimonials" class="hex-content">
+                                <a href="{{ route('testimonials.index') }}" class="hex-content">
                   <span class="hex-content-inner">
                     <span class="icon">
                       <i class="tf-chat"></i>
@@ -199,7 +199,7 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <a href="contact" class="hex-content">
+                                <a href="{{ route('contact.index') }}" class="hex-content">
                   <span class="hex-content-inner">
                     <span class="icon">
                       <i class="tf-envelope2"></i>

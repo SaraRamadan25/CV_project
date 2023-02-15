@@ -12,6 +12,6 @@ class ResumeController extends Controller
     {
         $educations = Education::all();
         $experiences = Experience::all();
-        return view('resume',compact('educations','experiences'));
+        return view('resume.index',compact('educations','experiences'));
     }
 }

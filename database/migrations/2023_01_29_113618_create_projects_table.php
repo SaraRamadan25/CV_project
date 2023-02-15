@@ -20,7 +20,7 @@ class CreateProjectsTable extends Migration
             $table->string('name');
             $table->text('image');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('user');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('type');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');

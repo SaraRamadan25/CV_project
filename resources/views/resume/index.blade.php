@@ -2,22 +2,11 @@
 
 <x-header />
 
-{{--@foreach($educations as $education)
-    <h5>{{ $education->name }}</h5>
-    <span>{{ $education->duratoin }}</span>
-    <p> {{ $education->description }} <br> </p>
-
-    @foreach($experiences as $experience)
-        <h5>{{ $experience->name }}</h5>
-        <span>{{ $experience->duration }}</span>
-        <p> {{ $experience->description }}<br></p>--}}
-
-
 <main class="site-wrapper">
     <div class="pt-table">
         <div class="pt-tablecell page-resume relative">
             <!-- .close -->
-            <a href="./" class="page-close"><i class="tf-ion-close"></i></a>
+            <a href=".." class="page-close"><i class="tf-ion-close"></i></a>
             <!-- /.close -->
 
             <div class="container">
