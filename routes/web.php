@@ -38,6 +38,8 @@ Route::resource('/resume',ResumeController::class);
 Route::resource('/projects',ProjectController::class);
 Route::resource('/testimonials',TestimonialController::class);
 Route::resource('/categories',CategoryController::class);
+Route::get('/categories/{category:name}', [CategoryController::class,'show']);
+
 Route::resource('/contact',ContactController::class);
 
 

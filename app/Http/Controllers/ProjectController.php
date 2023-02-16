@@ -9,15 +9,10 @@ use Illuminate\Http\Request;
 class ProjectController extends Controller
 {
 
-    public function index(Category $category,)
-    {
 
-        $category->load('projects');
-
-        return view('projects.index')->withCategory($category);
-    }
     public function create(){
-        $categories = Category::all();
+/*        $categories = Category::all();*/
+        $categories =['photoshop','illustrator','indesign','artworks'];
         return view('projects.create',compact('categories'));
     }
 
