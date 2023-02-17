@@ -34,10 +34,10 @@
                 </div>
 
                 <div class="row isotope-gutter">
-                    <div class="col-xs-12 col-sm-6 col-md-4 Photoshop Illustrator">
+                    <div class="col-xs-12 col-sm-6 col-md-4 ">
                         <figure class="works-item">
                             @foreach($projects as $project)
-                            <img src="assets/theme/images/works/1.jpg" alt="">
+                            <img src="assets/theme/images/works/1.jpg" alt="img">
                             <div class="overlay"></div>
                             <figcaption class="works-inner">
                                 <h4>{{ $project->name }}</h4>

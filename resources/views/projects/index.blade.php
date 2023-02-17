@@ -21,7 +21,9 @@
                     <div class="col-xs-12">
                         <ul class="filter list-inline">
                             <li><a href="/categories" class="active" data-filter="*">All</a></li>
+                            @foreach($categories as $category)
                             <li><a href="/categories/{{ $category->name }}" >{{ $category->name }}</a></li>
+                            @endforeach
                  {{--           <li><a href="#" data-filter=".Illustrator">Illustrator</a></li>
                             <li><a href="#" data-filter=".Indesign">Indesign</a></li>
                             <li><a href="#" data-filter=".Artworks">Artworks</a></li>--}}
