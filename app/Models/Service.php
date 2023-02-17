@@ -15,6 +15,7 @@ class Service extends Model
         'user_id'
     ];
     use HasFactory;
+
     public function user() :BelongsTo
     {
         return $this->belongsTo(User::class);

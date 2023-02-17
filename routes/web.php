@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
@@ -8,7 +9,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TestimonialController;
-use App\Http\Controllers\WorkController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,15 +29,18 @@ Route::get('/', function () {
 });
 
 Route::get('/index', function () {
-    return view('index');
-});
 
-Route::resource('/welcome',HomeController::class);
-Route::resource('/about',AboutController::class);
-Route::resource('/services',ServiceController::class);
-Route::resource('/resume',ResumeController::class);
-Route::resource('/projects',ProjectController::class);
-Route::resource('/testimonials',TestimonialController::class);
+    return view('index');
+})
+    ->name('home');
+
+
+Route::resource('/welcome',HomeController::class)->middleware('auth');
+Route::resource('/about',AboutController::class)->middleware('auth');
+Route::resource('/services',ServiceController::class)->middleware('auth');
+Route::resource('/resume',ResumeController::class)->middleware('auth');
+Route::resource('/projects',ProjectController::class)->middleware('auth');
+Route::resource('/testimonials',TestimonialController::class)->middleware('auth');
 Route::resource('/categories',CategoryController::class);
 Route::get('/categories/{category:name}', [CategoryController::class,'show'])->name('categories.show');
 
@@ -44,9 +48,6 @@ Route::resource('/contact',ContactController::class);
 
 
 
-
-
-
-
+Auth::routes();
 
 

@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ServiceRequest;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::all();
+        $user = Auth::user();
+        $services = $user->services;
         return view('services.index',compact('services'));
     }
     public function create(){
@@ -21,9 +23,9 @@ class ServiceController extends Controller
         Service::create([
             'name'=>$request->name,
             'description'=>$request->description,
-            'user_id'=>1
+            'user_id'=>auth()->id()
             ]);
-        return redirect()->back()->with('msg','service added successfully');
+        return redirect('services.index')->with('msg','service added successfully');
 
     }
     public function edit($id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application

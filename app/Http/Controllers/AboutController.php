@@ -33,16 +33,16 @@ class AboutController extends Controller
             'email'=>$request->email,
             'password'=>$request->password,
             'date_of_birth'=>$request->date_of_birth,
-             'speeches'=>$request->speeches,
+            'speeches'=>$request->speeches,
             'expert_in'=>$request->expert_in
 
         ]);
         return redirect()->back()->with('msg','user added successfully');
 
     }
-    public function edit(User $user): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function edit($id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-         User::findOrFail($user);
+        $user = User::findOrFail($id);
         $languages =['Arabic','English','German','Spanish','French'];
         $experiences =['UI/UX','Frontend','Backend','Datascience','Data Analysis'];
         return view('about.edit',compact('languages','experiences','user'));

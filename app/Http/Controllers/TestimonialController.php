@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TestimonialRequest;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TestimonialController extends Controller
 {
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        $testimonials = Testimonial::all();
+        $user = Auth::user();
+        $testimonials = $user->testimonials;
+
         return view('testimonials.index',compact('testimonials'));
     }
     public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application

@@ -8,6 +8,21 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         $user = User::query()->orderBy('created_at', 'desc')->first();
@@ -16,29 +31,29 @@ class HomeController extends Controller
         return view('welcome.index',compact('user','speeches','experiences'));
     }
 
-public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
-{
-    $speeches =['Arabic','English','German','Spanish','French'];
-    $experiences =['UI/UX','Frontend','Backend','Datascience','Data Analysis'];
-    return view('welcome.create',compact('speeches','experiences'));
-}
+    public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        $speeches =['Arabic','English','German','Spanish','French'];
+        $experiences =['UI/UX','Frontend','Backend','Datascience','Data Analysis'];
+        return view('welcome.create',compact('speeches','experiences'));
+    }
 
-public function store(WelcomeRequest $request): \Illuminate\Http\RedirectResponse
-{
-    User::create([
-        'name'=>$request->name,
-        'excerpt'=>$request->excerpt,
-        'description'=>$request->description,
-        'email'=>$request->email,
-        'password'=>$request->password,
-        'date_of_birth'=>$request->date_of_birth,
-        'expert_in'=>$request->expert_in,
-        'speeches'=>$request->speeches
+    public function store(WelcomeRequest $request): \Illuminate\Http\RedirectResponse
+    {
+        User::create([
+            'name'=>$request->name,
+            'excerpt'=>$request->excerpt,
+            'description'=>$request->description,
+            'email'=>$request->email,
+            'password'=>$request->password,
+            'date_of_birth'=>$request->date_of_birth,
+            'expert_in'=>$request->expert_in,
+            'speeches'=>$request->speeches
 
-    ]);
-    return redirect()->back()->with('msg','user added successfully');
+        ]);
+        return redirect()->back()->with('msg','user added successfully');
 
-}
+    }
 
     public function edit($id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
@@ -63,5 +78,5 @@ public function store(WelcomeRequest $request): \Illuminate\Http\RedirectRespons
         ]);
         return redirect()->route('welcome.index')->with('msg','user updated successfully');
     }
-}
 
+}

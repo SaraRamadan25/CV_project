@@ -27,7 +27,7 @@ public function index(){
             'type'=>$request->type,
             'image'=>$request->file('image')->store('public/images'),
             'category_id'=>$request->category_id,
-            'user_id'=>1
+            'user_id'=>auth()->id()
         ]);
         return redirect('index');
     }
