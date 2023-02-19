@@ -43,7 +43,7 @@
     <div class="form-group">
         <label for="Experiences">Experiences</label>
         <select multiple class="form-control" name="expert_in[]">
-            @foreach($experiences as $experience)
+            @foreach($expert_in as $experience)
             <option>{{ $experience }}</option>
             @endforeach
 

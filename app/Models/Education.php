@@ -17,7 +17,14 @@ class Education extends Model
         'duration',
         'description'
     ];
+   /* protected static function boot()
+    {
+        parent::boot();
 
+        static::created(function ($education) {
+            $education->users()->attach(auth()->id());
+        });
+    }*/
 
     public function users(): belongsToMany
     {

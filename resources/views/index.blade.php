@@ -1,5 +1,3 @@
-
-
 <x-header />
 <body><!-- set class="dark" on body tag for DARK-THEME -->
 
@@ -127,7 +125,7 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <a href="{{ route('resume.index') }}" class="hex-content">
+                                <a href="{{ route('educations.index') }}" class="hex-content">
                   <span class="hex-content-inner">
                     <span class="icon">
                       <i class="tf-tools"></i>

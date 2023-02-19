@@ -15,7 +15,7 @@ class Experience extends Model
     protected $fillable=[
         'name',
         'duration',
-        'experience'
+        'description'
     ];
     public function users(): belongsToMany
     {
