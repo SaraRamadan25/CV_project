@@ -40,19 +40,18 @@ class UserController extends Controller
         ]);
 
 
-        $user= User::find($user_id);
-        $user->educations()->attach($education_id);
+       /* $user= User::find($user_id);
+        $user->educations()->attach($education_id);*/
 
        /* $user->educations()
             ->sync(request('educations'));
 
         $user->experiences()
             ->sync(request('experiences'));*/
-        // Both don't work
+
+        //  don't work
 
         return redirect()->route('users.index');
-
-
 
 
     }
