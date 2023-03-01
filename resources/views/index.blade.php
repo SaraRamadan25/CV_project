@@ -77,7 +77,7 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <a href="{{ route('about.index') }}" class="hex-content">
+                                <a href="{{ route('user.index') }}" class="hex-content">
                   <span class="hex-content-inner">
                     <span class="icon">
                       <i class="tf-profile-male"></i>
@@ -101,7 +101,7 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <a href="{{ route('services.index') }}" class="hex-content">
+                                <a href="{{ route('service.index') }}" class="hex-content">
                   <span class="hex-content-inner">
                     <span class="icon">
                       <i class="tf-tools-2"></i>
@@ -125,7 +125,7 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <a href="{{ route('educations.index') }}" class="hex-content">
+                                <a href="{{ route('education.index') }}" class="hex-content">
                   <span class="hex-content-inner">
                     <span class="icon">
                       <i class="tf-tools"></i>
@@ -149,7 +149,7 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <a href="{{ route('projects.index') }}" class="hex-content">
+                                <a href="{{ route('project.index') }}" class="hex-content">
                   <span class="hex-content-inner">
                     <span class="icon">
                       <i class="tf-briefcase2"></i>
@@ -173,7 +173,7 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <a href="{{ route('testimonials.index') }}" class="hex-content">
+                                <a href="{{ route('testimonial.index') }}" class="hex-content">
                   <span class="hex-content-inner">
                     <span class="icon">
                       <i class="tf-chat"></i>
@@ -197,7 +197,7 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <a href="{{ route('contact.index') }}" class="hex-content">
+                                <a href="{{ route('contact.create') }}" class="hex-content">
                   <span class="hex-content-inner">
                     <span class="icon">
                       <i class="tf-envelope2"></i>

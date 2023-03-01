@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Testimonial extends Model
 {
+    use HasFactory;
+
     protected $fillable=[
         'name',
         'description',
@@ -15,7 +17,6 @@ class Testimonial extends Model
         'image',
         'user_id'
     ];
-    use HasFactory;
     public function user() :BelongsTo
     {
         return $this->BelongsTo(User::class);

@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Skill extends Model
 {
+    use HasFactory;
+
     protected $fillable=[
         'name',
         'percentage',
         'user_id'
     ];
-    use HasFactory;
     public function user() :BelongsTo
     {
         return $this->BelongsTo(User::class);

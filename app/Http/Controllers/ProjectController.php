@@ -5,46 +5,64 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Category;
 use App\Models\Project;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
-public function index(){
+public function index(): Factory|View|Application
+    {
+    $user = Auth::user();
+
     $categories = Category::all();
-    $projects = Project::all();
-    return view('projects.index',compact('categories','projects'));
+    $projects = $user->projects ;
+
+    return view('project.index',compact('categories','projects'));
 }
 
-    public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function create(): Factory|View|Application
     {
         $categories = Category::all();
-        return view('projects.create',compact('categories'));
+
+        return view('project.create',compact('categories'));
     }
-    public function store(ProjectRequest $request): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
+    public function store(ProjectRequest $request): Redirector|Application|RedirectResponse
     {
         Project::create([
             'name'=>$request->name,
             'type'=>$request->type,
-            'image'=>$request->file('image')->store('public/images'),
+            'image' => $request['image']->store('photos', 'public'),
             'category_id'=>$request->category_id,
             'user_id'=>auth()->id()
         ]);
-        return redirect('index');
+
+        return redirect('project');
     }
-    public function edit(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function edit(Project $project): Factory|View|Application
     {
         $categories = Category::all();
-        return view('projects.create',compact('categories'));
+
+        return view('project.edit',compact('categories','project'));
     }
-    public function update(ProjectRequest $request,$id)
+
+    public function update(ProjectRequest $request,Project $project): RedirectResponse
     {
-        $project = Project::findOrFail($id);
-        Project::update([
-            'name'=>$request->name,
-            'type'=>$request->type,
-            'image'=>$request->file('image')->store('public/images'),
-            'category_id'=>$request->category_id,
-        ]);
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('public/images');
+            $data['image'] = $imagePath;
+        }
+
+        $project->update($data);
+
+        return redirect()->route('project.index')->with('msg', 'Project updated successfully');
+
     }
 
 }

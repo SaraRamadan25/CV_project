@@ -1,4 +1,4 @@
-<form action="{{ route('services.update',$service->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+<form action="{{ route('service.update',$service->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
     @method('PATCH')
     @csrf
     <div class="row form-group">

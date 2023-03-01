@@ -17,10 +17,8 @@ class CreateExperienceUserTable extends Migration
 
         Schema::create('experience_user', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('experience_id');
-            $table->foreign('experience_id')->references('id')->on('experiences');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('experience_id')->constrained()->cascadeOnDelete();
         });
 
         Schema::enableForeignKeyConstraints();

@@ -13,37 +13,40 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $touches = ['educations'];
 
+    protected $casts =[
+        'speeches'=>'array',
+        'expert_in'=>'array',
+        'email_verified_at' => 'datetime',
 
-
-protected $casts =[
-    'speeches'=>'array',
-    'expert_in'=>'array',
-    'email_verified_at' => 'datetime',
-
-];
+    ];
     protected $fillable = [
         'name',
         'email',
         'password',
         'date_of_birth',
-        'languages',
         'expert_in',
         'freelance',
         'description',
         'excerpt',
-        'speeches'
-    ];
+        'speeches',
+        'image',
 
+    ];
 
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-
-
+    public function getFreelanceAttribute($value)
+    {
+        if ($value==1) {
+            return 'available';
+        } else {
+            return 'not available';
+        }
+    }
 
     public function skills(): HasMany
     {

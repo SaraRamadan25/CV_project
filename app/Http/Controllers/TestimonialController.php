@@ -4,23 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TestimonialRequest;
 use App\Models\Testimonial;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TestimonialController extends Controller
 {
-    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function index(): Factory|View|Application
     {
         $user = Auth::user();
         $testimonials = $user->testimonials;
 
-        return view('testimonials.index',compact('testimonials'));
+
+        return view('testimonial.index',compact('testimonials'));
     }
-    public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function create(): Factory|View|Application
     {
-        return view('testimonials.create');
+        return view('testimonial.create');
     }
-    public function store(TestimonialRequest $request): \Illuminate\Http\RedirectResponse
+    public function store(TestimonialRequest $request): RedirectResponse
     {
         $img = $request->file('image');
         $ext = $img->getClientOriginalExtension();
@@ -31,28 +36,25 @@ class TestimonialController extends Controller
             'name'=>$request->name,
             'role'=>$request->role,
             'description'=>$request->description,
-            'image'=>$image_name
+            'image'=>$image_name,
+            'user_id'=>Auth::id()
 
         ]);
         return redirect()->back()->with('msg','Testimonial added successfully');
     }
 
-
-    public function edit($id)
+    public function edit(Testimonial $testimonial): Factory|View|Application
     {
-        $testimonial = Testimonial::findOrFail($id);
-        return view ('testimonials.edit',compact ('testimonial'));
+
+        return view ('testimonial.edit',compact ('testimonial'));
 
     }
-    public function update(TestimonialRequest $request,$id): \Illuminate\Http\RedirectResponse
+    public function update(TestimonialRequest $request,Testimonial $testimonial): RedirectResponse
     {
-        $testimonial = Testimonial::findOrFail($id);
-        $testimonial->update([
-            'name'=>$request->name,
-            'role'=>$request->role,
-            'description'=>$request->description,
-        ]);
-        return redirect()->route('testimonials.index')->with('msg','Testimonial updated successfully');
+        $data = $request->validated();
+        $testimonial->update($data);
+
+        return redirect()->route('testimonial.index')->with('msg','Testimonial updated successfully');
     }
 
 

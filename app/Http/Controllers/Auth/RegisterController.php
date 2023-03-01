@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -16,7 +20,7 @@ class RegisterController extends Controller
     | Register Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles the registration of new users as well as their
+    | This controller handles the registration of new user as well as their
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
@@ -25,7 +29,7 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
-     * Where to redirect users after registration.
+     * Where to redirect user after registration.
      *
      * @var string
      */
@@ -56,11 +60,11 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function showRegistrationForm()
+    public function showRegistrationForm(): Factory|View|Application
     {
         $data = [
             'speeches' => ['Arabic','English','German','Spanish','French'],
-            'experiences' =>['UI/UX','Frontend','Backend','Datascience','Data Analysis']
+            'expert_in' =>['UI/UX','Frontend','Backend','Datascience','Data Analysis']
 
         ];
 
@@ -73,8 +77,9 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create(array $data): User
     {
+        $imagePath = $data['image']->store('photos', 'public');
 
         return User::create([
 
@@ -86,7 +91,9 @@ class RegisterController extends Controller
             'freelance'=>$data['freelance'],
             'excerpt'=>$data['excerpt'],
             'speeches'=>$data['speeches'],
-            'expert_in'=>$data['expert_in']
+            'expert_in'=>$data['expert_in'],
+            'image' => $imagePath
+
         ]);
     }
 }

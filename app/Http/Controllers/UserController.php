@@ -10,19 +10,25 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-
-
-    public function create(): Factory|View|Application
+    public function index(): Factory|View|Application
     {
+        $lastAuthenticatedUser = User::where('id', Auth::id())->latest()->first();
+
+        $skills = $lastAuthenticatedUser->skills;
+
+        return view('user.index',compact('lastAuthenticatedUser','skills'));
+    }
+
+    public function create(){
         $speeches =['Arabic','English','German','Spanish','French'];
         $expert_in =['UI/UX','Frontend','Backend','Datascience','Data Analysis'];
         $educations = Education::all();
         $experiences= Experience::all();
-        return view('users.create',compact('speeches','experiences','expert_in','educations'));
+        return view('user.create',compact('speeches','experiences','expert_in','educations'));
     }
 
     public function store(UserRequest $request): RedirectResponse
@@ -35,48 +41,42 @@ class UserController extends Controller
             'password'=>$request->password,
             'date_of_birth'=>$request->date_of_birth,
             'expert_in'=>$request->expert_in,
-            'speeches'=>$request->speeches
-
-        ]);
-
-
-       /* $user= User::find($user_id);
-        $user->educations()->attach($education_id);*/
-
-       /* $user->educations()
-            ->sync(request('educations'));
-
-        $user->experiences()
-            ->sync(request('experiences'));*/
-
-        //  don't work
-
-        return redirect()->route('users.index');
-
-
-    }
-
-    public function edit($id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
-    {
-        $user = User::findOrFail($id);
-        $speeches =['Arabic','English','German','Spanish','French'];
-        $experiences =['UI/UX','Frontend','Backend','Datascience','Data Analysis'];
-        return view('users.edit',compact('speeches','experiences','user'));
-
-    }
-    public function update(UserRequest $request,$id): \Illuminate\Http\RedirectResponse
-    {
-        $user = User::findOrFail($id);
-        $user->update([
-            'name'=>$request->name,
-            'excerpt'=>$request->excerpt,
-            'description'=>$request->description,
-            'email'=>$request->email,
-            'password'=>$request->password,
-            'date_of_birth'=>$request->date_of_birth,
             'speeches'=>$request->speeches,
-            'expert_in'=>$request->expert_in
+            'freelance'=>$request->freelance
+
         ]);
-        return redirect()->route('users.index')->with('msg','user updated successfully');
+        $user = Auth::user();
+
+        $user->educations()
+            ->sync
+            (request('education_id[]'));
+
+        dd($request->all());
+        return redirect()->route('user');
+
+
     }
+    public function edit(User $user): Factory|View|Application
+    {
+        $speeches =['Arabic','English','German','Spanish','French'];
+        $expert_in =['UI/UX','Frontend','Backend','Datascience','Data Analysis'];
+
+        return view('user.edit',compact('speeches','expert_in','user'));
+
+    }
+    public function update(UserRequest $request,User $user): RedirectResponse
+    {
+
+        $data = $request->validated();
+
+        $user->educations()
+            ->sync
+            (request('educations'));
+        dd( (request()->all()));
+
+        $user->update($data);
+
+        return redirect()->route('user.index')->with('msg','user updated successfully');
+    }
+
 }

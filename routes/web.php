@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\AboutController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ExperienceController;
@@ -9,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -25,38 +24,43 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/index', function () {
-
-    return view('index');
-})
-    ->name('home');
-
-Route::get('/home',function (){
+Route::get('/',function (){
    return view('index');
 });
 
 
-Route::resource('/welcome',HomeController::class);
-Route::resource('/users',UserController::class)->middleware('auth');
+Route::middleware('auth')->group(function () {
 
-Route::resource('/about',AboutController::class)->middleware('auth');
-Route::resource('/services',ServiceController::class)->middleware('auth');
-Route::resource('/educations',EducationController::class)->middleware('auth');
-Route::resource('/experiences',ExperienceController::class)->middleware('auth');
+    Route::get('welcome', [HomeController::class, 'index'])->name('welcome.index'); //last authenticated user
 
-Route::resource('/projects',ProjectController::class)->middleware('auth');
-Route::resource('/testimonials',TestimonialController::class)->middleware('auth');
-Route::resource('/categories',CategoryController::class);
-Route::get('/categories/{category:name}', [CategoryController::class,'show'])->name('categories.show');
+    Route::resource('education', EducationController::class);
 
-Route::resource('/contact',ContactController::class);
+    Route::resource('experience', ExperienceController::class);
 
+    Route::resource('project', ProjectController::class);
 
+    Route::resource('testimonial', TestimonialController::class);
+
+    Route::resource('service', ServiceController::class);
+
+    Route::get('skill/create', [SkillController::class,'create']);
+    Route::post('skill', [SkillController::class,'store']);
+    Route::get('skill/{skill}/edit', [SkillController::class,'edit']);
+    Route::patch('skill/{skill}', [SkillController::class,'update']);
+
+    Route::resource('user', UserController::class);
+
+    /*Route::get('user', [UserController::class,'index'])->name('user.index');
+    Route::get('user/{user}/edit', [UserController::class,'edit'])->name('user.edit');
+    Route::patch('user/{user}', [UserController::class,'update'])->name('user.update');*/
+
+    Route::get('category', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('category/{category:name}', [CategoryController::class, 'show'])->name('category.show');
+
+    Route::get('contact', [ContactController::class, 'create'])->name('contact.create');
+    Route::post('contact', [ContactController::class, 'store']);
+
+});
 
 Auth::routes();
 

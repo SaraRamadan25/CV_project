@@ -1,5 +1,3 @@
-
-
 <x-header />
 <main class="site-wrapper">
     <div class="pt-table">
@@ -29,7 +27,7 @@
                         <div class="page-title text-center">
                             <h2>About <span class="primary">me</span> <span class="title-bg">Name</span></h2>
 
-                            <p> {{ $user->excerpt }}</p>
+                            <p> {{ $lastAuthenticatedUser->excerpt }}</p>
 
                         </div>
                     </div>
@@ -37,22 +35,22 @@
                     <div class="col-xs-12 col-md-6">
                         <div class="about-author">
                             <figure class="author-thumb">
-                                <img src='assets/theme/images/author.jpg' alt="">
+                                <img class="col-sm-2" src="/storage/{{ $lastAuthenticatedUser->image }}" width="20" alt="no image" >
                             </figure> <!-- /.author-bio -->
                             <div class="author-desc">
-                                <p><b>Date of birth:</b> {{ $user->date_of_birth }} </p>
+                                <p><b>Date of birth:</b> {{ $lastAuthenticatedUser->date_of_birth }} </p>
 
-                                <p><b>Language:</b> {{ implode(', ', $user->speeches) }}</p>
-
-
-                                    <p> <b>Expert in:</b>{{ implode(', ', $user->expert_in) }}</p>
+                                <p><b>Language:</b> {{ implode(', ', $lastAuthenticatedUser->speeches) }}</p>
 
 
-                                <p><b>Freelance:</b> {{ $user->freelance }}</p>
+                                    <p> <b>Expert in:</b>{{ implode(', ', $lastAuthenticatedUser->expert_in) }}</p>
+
+
+                                <p><b>Freelance:</b> {{ $lastAuthenticatedUser->freelance }}</p>
                             </div>
                             <!-- /.author-desc -->
                         </div> <!-- /.about-author -->
-                        <p>{{ $user->description }}</p>
+                        <p>{{ $lastAuthenticatedUser->description }}</p>
                     </div> <!-- /.col -->
 
                     <div class="col-xs-12 col-md-6">
@@ -82,7 +80,7 @@
             <nav class="page-nav clear">
                 <div class="container">
                     <div class="flex flex-middle space-between">
-                        <span class="prev-page"><a href="welcome2" class="link">&larr; Prev Page</a></span>
+                        <span class="prev-page"><a href="welcome" class="link">&larr; Prev Page</a></span>
                         <span class="copyright">Copyright &copy; 2021, Designed &amp; Developed by <a href="https://themefisher.com/">Themefisher</a>.</span>
                         <span class="next-page"><a href="services" class="link">Next Page &rarr;</a></span>
                     </div>

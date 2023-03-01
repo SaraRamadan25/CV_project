@@ -1,5 +1,5 @@
-<form action="{{ route('testimonials.update', $testimonial->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
-    @method('patch')
+<form action="{{ route('testimonial.update', $testimonial->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+    @method('PATCH')
     @csrf
     <div class="row form-group">
         <div class="col col-md-3"><label for="text-input" class=" form-control-label">name</label></div>

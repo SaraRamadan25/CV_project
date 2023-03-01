@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row mb-3">
@@ -65,9 +65,9 @@
 
 
                         <div class="row mb-3">
-                        <label for="experiences">Experiences</label>
+                        <label for="experiences">Expert_in</label>
                             <select id="experiences" name="expert_in[]" multiple>
-                                @foreach ($experiences as $experience)
+                                @foreach ($expert_in as $experience)
                                     <option value="{{ $experience }}">{{ $experience }}</option>
                                 @endforeach
                             </select>
@@ -104,7 +104,7 @@
 
                         <div class="row mb-3">
                             <label for="freelance" class="col-md-4 col-form-label text-md-end">{{ __('Freelance') }}</label>
-
+<div> enter 1 if you are available, if you aren't, enter 0</div>
                             <div class="col-md-6">
                                 <input id="freelance" type="text" class="form-control @error('freelance') is-invalid @enderror" name="freelance" value="{{ old('freelance') }}" required >
 
@@ -114,6 +114,11 @@
                 </span>
                                 @enderror
                             </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3"></div>
+                            <div class="col-12 col-md-9"><input type="file" name="image" placeholder="image" class="form-control"></div>
                         </div>
 
                         <div class="row mb-3">
@@ -130,7 +135,9 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+
+
+                                        <div class="row mb-3">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">

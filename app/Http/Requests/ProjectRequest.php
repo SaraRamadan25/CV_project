@@ -27,7 +27,7 @@ class ProjectRequest extends FormRequest
             'name'=>'required|max:255',
             'type'=>'required|max:255',
             'image'=>'required|image',
-            'category_id'=>'integer'
+            'user_id'=>'integer'
 
         ];
     }

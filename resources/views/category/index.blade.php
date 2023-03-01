@@ -22,7 +22,7 @@
                         <ul class="filter list-inline">
                             <li><a href="/categories" class="active" data-filter="*">All</a></li>
                             @foreach ($categories as $category)
-                            <li><a href={{ route('categories.show',$category->name) }} >{{ $category->name }}</a></li>
+                            <li><a href={{ route('category.show',$category->name) }} >{{ $category->name }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -42,17 +42,15 @@
                     </div>
                     @endforeach
 
-
-
                 </div> <!-- /.row -->
             </div> <!-- /.container -->
 
             <nav class="page-nav clear">
                 <div class="container">
                     <div class="flex flex-middle space-between">
-                        <span class="prev-page"><a href="resume.html" class="link">&larr; Prev Page</a></span>
+                        <span class="prev-page"><a href="education" class="link">&larr; Prev Page</a></span>
                         <span class="copyright">Copyright &copy; 2021, Designed &amp; Developed by <a href="https://themefisher.com/">Themefisher</a>.</span>
-                        <span class="next-page"><a href="testimonials.html" class="link">Next Page &rarr;</a></span>
+                        <span class="next-page"><a href="testimonial" class="link">Next Page &rarr;</a></span>
                     </div>
                 </div>
                 <!-- /.page-nav -->

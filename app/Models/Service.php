@@ -9,12 +9,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Service extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'name',
         'description',
         'user_id'
     ];
-    use HasFactory;
 
     public function user() :BelongsTo
     {

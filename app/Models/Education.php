@@ -9,22 +9,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Education extends Model
 {
     use HasFactory;
-    protected $table='educations'; // maybe laravel don't treat educations as plural, so give it a name of the table
+
+    protected $table='educations'; // maybe laravel don't treat education as plural, so give it a name of the table
     protected $dates = ['duration'];
 
     protected $fillable=[
-         'name' ,
+        'education_id',
+        'name',
         'duration',
-        'description'
-    ];
-   /* protected static function boot()
-    {
-        parent::boot();
+        'description',
 
-        static::created(function ($education) {
-            $education->users()->attach(auth()->id());
-        });
-    }*/
+    ];
+
 
     public function users(): belongsToMany
     {

@@ -18,7 +18,7 @@ class SkillFactory extends Factory
     public function definition()
     {
         return [
-            'user_id'=>1,
+            'user_id'=>2,
             'name' => fake()->name(),
             'percentage'=>fake()->numberBetween(1,100)
         ];

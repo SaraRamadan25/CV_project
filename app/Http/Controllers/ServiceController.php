@@ -4,41 +4,48 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ServiceRequest;
 use App\Models\Service;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
-    public function index()
+    public function index(): Factory|View|Application
     {
         $user = Auth::user();
+
         $services = $user->services;
-        return view('services.index',compact('services'));
+        return view('service.index',compact('services'));
     }
-    public function create(){
-        return view('services.create');
+    public function create(): Factory|View|Application
+    {
+        return view('service.create');
     }
-    public function store(ServiceRequest $request): \Illuminate\Http\RedirectResponse
+    public function store(ServiceRequest $request): RedirectResponse
     {
         Service::create([
             'name'=>$request->name,
             'description'=>$request->description,
             'user_id'=>auth()->id()
             ]);
-        return redirect('services.index')->with('msg','service added successfully');
+        return redirect('service')->with('msg','service added successfully');
 
     }
-    public function edit($id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function edit(Service $service): Factory|View|Application
     {
-        $service = Service::findOrFail($id);
-        return view('services.edit',compact('service'));
+        return view('service.edit',compact('service'));
     }
-    public function update(ServiceRequest $request,$id){
 
-        $service = Service::findOrFail($id);
-        $request->update([
-            'name'=>$request->name,
-            'description'=>$request->description
-        ]);
+    public function update(ServiceRequest $request,Service $service): Redirector|Application|RedirectResponse
+    {
+        $data = $request->validated();
+        $service->update($data);
+
+        return redirect('service')->with('msg','service updated successfully');
+
     }
 }

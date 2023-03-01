@@ -25,8 +25,9 @@ class UserFactory extends Factory
             'description'=>fake()->paragraph(),
             'expert_in'=>fake()->shuffleArray(),
             'speeches'=>fake()->shuffleArray(),
-            'freelance'=>'Available',
+            'freelance'=>1,
             'excerpt'=>fake()->sentence(),
+            'image'=>fake()->image(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'remember_token' => Str::random(10),
         ];

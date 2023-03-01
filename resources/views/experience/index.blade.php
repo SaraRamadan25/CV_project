@@ -19,6 +19,14 @@
                     </div>
                 </div> <!-- /.row -->
 
+                <div class="container">
+                    @if(\Illuminate\Support\Facades\Session::has('msg'))
+                        <div class="alert alert-success">
+                            {{ \Illuminate\Support\Facades\Session::get('msg') }}
+                        </div>
+                    @endif
+                </div>
+
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 ">
                         <div class="history-block">
@@ -40,22 +48,22 @@
                                 <!-- /.history-item -->
 
                                 @if ($educations !== null)
-                                @foreach($educations as $educations)
+                                    @foreach($educations as $education)
 
-                                    <div class="history-item">
-                                        <div class="history-icon">
-                                            <span class="history-hex"></span>
-                                            <i class="tf-documents5"></i>
+                                        <div class="history-item">
+                                            <div class="history-icon">
+                                                <span class="history-hex"></span>
+                                                <i class="tf-documents5"></i>
+                                            </div>
+                                            <div class="history-text">
+                                                <h5>{{ $education->name }}</h5>
+                                                <span>{{ \Carbon\Carbon::parse($education->duration)->format('Y')}}</span>
+                                                <p> {{ $education->description }}<br></p>
+                                            </div>
+
                                         </div>
-                                        <div class="history-text">
-                                            <h5>{{ $educations->name }}</h5>
-                                            <span>{{ \Carbon\Carbon::parse($educations->duration)->format('Y')}}</span>
-                                            <p> {{ $educations->description }}<br></p>
-                                        </div>
 
-                                    </div>
-
-                                @endforeach
+                                    @endforeach
                                 @endif
 
 
@@ -93,21 +101,21 @@
 
                     @if ($experiences !== null)
 
-                    @foreach($experiences as $experience)
+                        @foreach($experiences as $experience)
 
-                        <div class="history-item">
-                            <div class="history-icon">
-                                <span class="history-hex"></span>
-                                <i class="tf-documents5"></i>
+                            <div class="history-item">
+                                <div class="history-icon">
+                                    <span class="history-hex"></span>
+                                    <i class="tf-documents5"></i>
+                                </div>
+                                <div class="history-text">
+                                    <h5>{{ $experience->name }}</h5>
+                                    <span>{{ \Carbon\Carbon::parse($experience->duration)->format('Y')}}</span>
+                                    <p> {{ $experience->description }}<br></p>
+                                </div>
                             </div>
-                            <div class="history-text">
-                                <h5>{{ $experience->name }}</h5>
-                                <span>{{ \Carbon\Carbon::parse($experience->duration)->format('Y')}}</span>
-                                <p> {{ $experience->description }}<br></p>
-                            </div>
-                        </div>
 
-                    @endforeach
+                        @endforeach
                     @endif
 
 

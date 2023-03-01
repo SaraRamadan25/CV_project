@@ -19,8 +19,7 @@ class CreateSkillsTable extends Migration
             $table->id();
             $table->string('name');
             $table->double('percentage');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
 

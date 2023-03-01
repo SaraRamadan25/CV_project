@@ -21,8 +21,7 @@ class CreateTestimonialsTable extends Migration
             $table->text('description');
             $table->string('role');
             $table->string('image');
-            $table->unsignedBigInteger('user_id')->default(1);
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
 

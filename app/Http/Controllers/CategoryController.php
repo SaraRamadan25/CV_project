@@ -4,22 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Project;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class CategoryController extends Controller
 {
-    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function index(): Factory|View|Application
     {
         $categories = Category::all();
         $projects = Project::all();
-        return view('categories.index',compact('categories','projects'));
+
+        return view('category.index',compact('categories','projects'));
     }
 
-        public function show(Category $category): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+        public function show(Category $category): Factory|View|Application
         {
         $projects = $category->projects;
 
-        return view('categories.show', compact('category', 'projects'));
+        return view('category.show', compact('category', 'projects'));
     }
 
 }

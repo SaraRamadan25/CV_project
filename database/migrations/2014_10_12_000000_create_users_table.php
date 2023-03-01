@@ -22,9 +22,10 @@ return new class extends Migration
             $table->date('date_of_birth');
             $table->json('speeches'); //was languages //but there is a conflict !
             $table->json('expert_in');
-            $table->enum('freelance',['Available','Not Available']);
+            $table->tinyInteger('freelance');
             $table->text('description');
             $table->text('excerpt');
+            $table->string('image')->default('');
             $table->rememberToken();
             $table->timestamps();
         });
