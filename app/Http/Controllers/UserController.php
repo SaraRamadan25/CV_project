@@ -49,19 +49,18 @@ class UserController extends Controller
 
         $user->educations()
             ->sync
-            (request('education_id[]'));
-
-        dd($request->all());
-        return redirect()->route('user');
+            (request('education_id'));
+        return redirect()->route('user.index')->with('msg','user created successfully');
 
 
     }
     public function edit(User $user): Factory|View|Application
     {
+        $educations = Education::all();
         $speeches =['Arabic','English','German','Spanish','French'];
         $expert_in =['UI/UX','Frontend','Backend','Datascience','Data Analysis'];
 
-        return view('user.edit',compact('speeches','expert_in','user'));
+        return view('user.edit',compact('speeches','expert_in','user','educations'));
 
     }
     public function update(UserRequest $request,User $user): RedirectResponse
@@ -71,8 +70,7 @@ class UserController extends Controller
 
         $user->educations()
             ->sync
-            (request('educations'));
-        dd( (request()->all()));
+            (request('education_id'));
 
         $user->update($data);
 

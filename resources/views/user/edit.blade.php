@@ -53,6 +53,14 @@
         </select>
     </div>
 
+    <label for="education">Choose your educations</label>
+    <select multiple name="education_id[]" >
+        @foreach($educations as $education)
+
+            <option value="{{ $education->id }}">{{ $education->name }}</option>
+        @endforeach
+
+    </select>
 
     <div class="card-footer">
         <button type="submit" class="btn btn-primary btn-sm" >
