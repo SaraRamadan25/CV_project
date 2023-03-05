@@ -13,8 +13,6 @@ class CreateTestimonialsTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
-
         Schema::create('testimonials', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -24,8 +22,6 @@ class CreateTestimonialsTable extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**

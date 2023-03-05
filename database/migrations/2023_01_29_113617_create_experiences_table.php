@@ -13,8 +13,6 @@ class CreateExperiencesTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
-
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -23,7 +21,6 @@ class CreateExperiencesTable extends Migration
             $table->timestamps();
         });
 
-        Schema::enableForeignKeyConstraints();
     }
 
     /**

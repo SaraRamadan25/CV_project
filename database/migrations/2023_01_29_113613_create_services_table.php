@@ -13,8 +13,6 @@ class CreateServicesTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
-
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -22,8 +20,6 @@ class CreateServicesTable extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**

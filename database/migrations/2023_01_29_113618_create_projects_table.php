@@ -13,8 +13,6 @@ class CreateProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
-
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -25,7 +23,6 @@ class CreateProjectsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::enableForeignKeyConstraints();
     }
 
     /**

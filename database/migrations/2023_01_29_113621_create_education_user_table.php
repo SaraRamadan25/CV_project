@@ -13,15 +13,11 @@ class CreateEducationUserTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
-
         Schema::create('education_user', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('education_id')->constrained('educations')->cascadeOnDelete();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**
