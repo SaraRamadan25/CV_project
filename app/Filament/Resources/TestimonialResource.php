@@ -26,6 +26,9 @@ class TestimonialResource extends Resource
                 Forms\Components\TextInput::make('description')->required(),
                 Forms\Components\TextInput::make('role')->required(),
                 Forms\Components\FileUpload::make('image')->required(),
+                Forms\Components\Select::make('user_id')
+                    ->relationship('user','name')
+
             ]);
     }
 

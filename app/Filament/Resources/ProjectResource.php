@@ -32,7 +32,11 @@ class ProjectResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->sortable(),
-                Tables\Columns\TextColumn::make('description')->searchable(),
+                Tables\Columns\TextColumn::make('type')->searchable(),
+                Tables\Columns\TextColumn::make('user.name'),
+                Tables\Columns\TextColumn::make('category.name')
+
+
             ])
             ->filters([
                 //
