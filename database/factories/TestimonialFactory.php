@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,14 +17,14 @@ class TestimonialFactory extends Factory
      */
     public function definition()
     {
+        $userIds = User::pluck('id');
+        $randomUserId = $this->faker->randomElement($userIds);
         return [
             'name' => fake()->name(),
             'description' => fake()->paragraph(),
             'role' => fake()->word(),
             'image' => fake()->image(),
-            'user_id'=>2
-
-
+            'user_id'=>$randomUserId,
 
         ];
     }

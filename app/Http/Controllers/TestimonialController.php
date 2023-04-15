@@ -18,7 +18,6 @@ class TestimonialController extends Controller
         $user = Auth::user();
         $testimonials = $user->testimonials;
 
-
         return view('testimonial.index',compact('testimonials'));
     }
     public function create(): Factory|View|Application
@@ -40,7 +39,8 @@ class TestimonialController extends Controller
             'user_id'=>Auth::id()
 
         ]);
-        return redirect()->back()->with('msg','Testimonial added successfully');
+
+        return redirect()->route('testimonial.index')->with('msg','Testimonial added successfully');
     }
 
     public function edit(Testimonial $testimonial): Factory|View|Application

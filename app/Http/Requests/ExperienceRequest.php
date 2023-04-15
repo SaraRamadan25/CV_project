@@ -26,7 +26,8 @@ class ExperienceRequest extends FormRequest
          return [
              'name'=>'required:max:255',
              'duration'=>'required',
-             'description'=>'required'
+             'description'=>'required',
+             'user_id' => 'required|integer'
          ];
 
     }

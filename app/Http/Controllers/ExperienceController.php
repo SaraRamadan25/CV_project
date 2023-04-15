@@ -32,7 +32,8 @@ class ExperienceController extends Controller
             Experience::create([
                 'name' => $request->name,
                 'duration' => $request->duration,
-                'description' => $request->description
+                'description' => $request->description,
+                'user_id'=>$request->user()->id
             ]);
             return redirect()->route('experience.index')->with('msg','Experience created successfully');
         }
@@ -48,7 +49,6 @@ class ExperienceController extends Controller
             $experience->update($data);
 
             return redirect()->route('experience.index')->with('msg', 'experience updated successfully');
-
 
     }
 
