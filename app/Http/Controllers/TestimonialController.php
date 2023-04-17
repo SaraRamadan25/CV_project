@@ -39,7 +39,6 @@ class TestimonialController extends Controller
             'user_id'=>Auth::id()
 
         ]);
-
         return redirect()->route('testimonial.index')->with('msg','Testimonial added successfully');
     }
 
