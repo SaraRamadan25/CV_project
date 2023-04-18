@@ -41,7 +41,7 @@ public function index(): Factory|View|Application
             'user_id'=>auth()->id()
         ]);
 
-        return redirect('project');
+        return redirect()->route('project.index');
     }
     public function edit(Project $project): Factory|View|Application
     {

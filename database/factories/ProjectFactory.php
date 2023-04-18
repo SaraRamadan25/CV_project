@@ -2,27 +2,32 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\User;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\Testing\FileFactory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
- */
 class ProjectFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Project::class;
+
     public function definition()
     {
-        return [
-            'name'=>fake()->name,
-            'user_id'=>1,
-            'type'=>fake()->name,
-            'category_id'=>1,
-            'image' => fake()->image(),
+        $image = (new FileFactory)->image('newimage', 200, 200);
 
+        $userIds = User::pluck('id');
+        $randomUserId = $this->faker->randomElement($userIds);
+
+        $categoryIds = Category::pluck('id');
+        $randomCategoryId = $this->faker->randomElement($categoryIds);
+
+        return [
+            'name' => $this->faker->name,
+            'user_id' => $randomUserId,
+            'type' => $this->faker->name,
+            'category_id' => $randomCategoryId,
+            'image' => $image,
         ];
     }
 }
