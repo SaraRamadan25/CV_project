@@ -37,23 +37,28 @@ class EducationTest extends TestCase
     }
 
     /** @test */
-    public function only_authenticated_users_can_update_their_education(){
-
-
+    public function only_authenticated_users_can_update_their_education()
+    {
+        // this test passed without user_id in educations table, but the one above don't
         $user = User::factory()->create();
+        $education = Education::factory()->create(['user_id' => $user->id]);
 
-        $education= Education::factory()->create(['user_id' => $user->id]);
+        $updatedEducationAttributes = [
+            'name' => 'New Name',
+            'duration' => '2023-04-12 10:00:00',
+            'description' => 'new description',
+            'user_id' => $user->id,
+        ];
+
+        $education = Education::find($education->id);
+        $education->update($updatedEducationAttributes);
 
         $this->actingAs($user)
-            ->patch('education/' . $education->id,  $attributes = [
-                'name' => 'MANS',
-                'duration' => '2023-04-12 10:00:00',
-                'description' => 'new description',
-                'user_id' => $user->id,
-            ]);
+            ->patch('education/' . $education->id, $updatedEducationAttributes);
+        $this->get('education/' . $education->id . '/edit')
+            ->assertOk();
 
-        $this->get('education/' . $education->id .'/edit')->assertOk();
-
-        $this->assertDatabaseHas('educations', $attributes);
+        $this->assertDatabaseHas('educations', $updatedEducationAttributes);
     }
+
 }
