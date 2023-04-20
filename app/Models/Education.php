@@ -11,10 +11,8 @@ class Education extends Model
     use HasFactory;
 
     protected $table='educations'; // maybe laravel don't treat education as plural, so give it a name of the table
-    protected $dates = ['duration'];
 
     protected $fillable=[
-        'education_id',
         'name',
         'duration',
         'description',

@@ -1,5 +1,5 @@
 <label for="education">education</label>
-<form action="{{ route('education.update' ,$education) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+<form action="{{ route('education.update' ,$education->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
     @method('PATCH')
     @csrf
     <div class="row form-group">

@@ -33,7 +33,12 @@ class UserController extends Controller
 
     public function store(UserRequest $request): RedirectResponse
     {
-        $user = User::create([
+        $img = $request->file('image');
+        $ext = $img->getClientOriginalExtension();
+        $image_name = "testimonial-$request->id.$ext";
+        $img->move(public_path('storage/app/uploadedPhotos'),$image_name);
+
+        User::create([
             'name'=>$request->name,
             'excerpt'=>$request->excerpt,
             'description'=>$request->description,
@@ -42,6 +47,7 @@ class UserController extends Controller
             'date_of_birth'=>$request->date_of_birth,
             'expert_in'=>$request->expert_in,
             'speeches'=>$request->speeches,
+            'image'=>$image_name,
             'freelance'=>$request->freelance
 
         ]);
@@ -50,8 +56,11 @@ class UserController extends Controller
         $user->educations()
             ->sync
             (request('education_id'));
-        return redirect()->route('user.index')->with('msg','user created successfully');
 
+        $user->experiences()
+            ->sync
+            (request('experience_id'));
+        return redirect()->route('user.index')->with('msg','user created successfully');
 
     }
     public function edit(User $user): Factory|View|Application

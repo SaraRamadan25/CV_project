@@ -32,7 +32,7 @@ class UserRequest extends FormRequest
             'date_of_birth'=>'required',
             'speeches'=>'required',
             'expert_in'=>'required',
-            'freelance'=>'integer',
+            'freelance'=>'required',
             'image'=>'image',
         ];
     }

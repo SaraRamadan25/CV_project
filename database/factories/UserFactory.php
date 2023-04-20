@@ -17,14 +17,15 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'date_of_birth'=>fake()->date(),
             'description'=>fake()->paragraph(),
-            'expert_in'=>fake()->shuffleArray(),
-            'speeches'=>fake()->shuffleArray(),
+            'expert_in' => $this->faker->randomElements(['PHP', 'Java', 'Python', 'Ruby'], 2),
+            'speeches'=>$this->faker->randomElements(['Arabic', 'English', 'French', 'Germany'], 2),
             'freelance'=>1,
             'excerpt'=>fake()->sentence(),
             'image'=>fake()->image(),

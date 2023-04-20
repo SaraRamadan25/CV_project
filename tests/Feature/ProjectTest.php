@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class ProjectTest extends TestCase
@@ -51,27 +52,31 @@ class ProjectTest extends TestCase
     }
 
     /** @test */
-
-    public function only_authenticated_users_can_update_their_projects(){
-
+    public function only_authenticated_users_can_update_their_projects()
+    {
         $user = User::factory()->create();
         $category = Category::factory()->create();
 
-        $project = Project::factory()->create(['user_id' => $user->id,'category_id'=>$category->id]);
-        $newImage = UploadedFile::fake()->image('newimage.jpg');
+        $project = Project::factory()->create([
+            'user_id' => $user->id,
+            'category_id' => $category->id,
+        ]);
 
+        $newImage = UploadedFile::fake()->image('newimage.jpg');
+        Storage::fake('public');
         $attributes = [
             'name' => 'HTML',
             'image' => $newImage,
             'type' => 'new type',
             'user_id' => $user->id,
-            'category_id'=>$category->id
+            'category_id' => $category->id,
         ];
 
         $this->actingAs($user)
             ->patch('project/' . $project->id, $attributes);
-        $this->assertDatabaseHas('projects', $attributes);
 
+        $attributes['image'] = $newImage->hashName('public/images');
+        $this->assertDatabaseHas('projects', $attributes);
     }
 
 }

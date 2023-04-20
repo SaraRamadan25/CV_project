@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,10 +17,13 @@ class EducationFactory extends Factory
      */
     public function definition()
     {
+        $userIds = User::pluck('id');
+        $randomUserId = $this->faker->randomElement($userIds);
         return [
             'name' => fake()->name(),
-            'duration'=>fake()->date(),
-            'description'=>fake()->paragraph()
+            'duration'=>"2005-07-18 00:00",
+            'description'=>fake()->paragraph(),
+            'user_id'=>$randomUserId
         ];
     }
 }
