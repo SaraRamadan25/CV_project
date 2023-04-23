@@ -18,7 +18,7 @@ class HomeTest extends TestCase
 
     /** @test */
 
-    public function any_user_can_access_index_page()
+    public function anyone_can_access_index_page()
     {
         $user = User::factory()->create();
         $this->get('/')->assertOk();
