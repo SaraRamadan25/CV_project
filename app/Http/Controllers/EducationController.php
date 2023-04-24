@@ -44,7 +44,6 @@ class EducationController extends Controller
         return redirect()->route('education.index')->with('msg','Education created successfully');
         }
 
-
         public function edit(Education $education): Factory|View|Application
         {
         return view('education.edit',compact('education'));
