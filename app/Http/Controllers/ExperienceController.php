@@ -33,7 +33,6 @@ class ExperienceController extends Controller
                 'name' => $request->name,
                 'duration' => $request->duration,
                 'description' => $request->description,
-                'user_id'=>$request->user()->id
             ]);
             return redirect()->route('experience.index')->with('msg','Experience created successfully');
         }

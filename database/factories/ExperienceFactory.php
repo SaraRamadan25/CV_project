@@ -19,14 +19,12 @@ class ExperienceFactory extends Factory
     public function definition()
 
     {
-        $userIds = User::pluck('id'); // get all user IDs from the database
-        $randomUserId = $this->faker->randomElement($userIds); // pick a random user ID
+
 
         return [
             'name' => fake()->name(),
             'duration'=>fake()->date(),
             'description'=>fake()->paragraph(),
-            'user_id'=>$randomUserId,
         ];
     }
 }

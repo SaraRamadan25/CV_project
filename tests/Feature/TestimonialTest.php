@@ -28,18 +28,19 @@ class TestimonialTest extends TestCase
         $response = $this->get('/testimonial/create');
         $response->assertStatus(302);
 
-        $this->actingAs($user);
-        $response = $this->get('/testimonial/create');
-        $response->assertStatus(200);
+        $this->actingAs($user)
+            ->get('/testimonial/create')
+            ->assertStatus(200);
+
 
         // Create a testimonial with the authenticated user and assert that it was added successfully
         $testimonial = Testimonial::factory()->create(['user_id' => $user->id])->toArray();
         unset($testimonial['created_at']);
         unset($testimonial['updated_at']);
 
-        $this->post('/testimonial', $testimonial);
-        /*    ->assertRedirect(route('testimonial.index'))
-            ->assertSessionHas('msg', 'Testimonial added successfully');*/
+        $this->post('/testimonial', $testimonial)
+            ->assertRedirect(route('testimonial.index'))
+            ->assertSessionHas('msg', 'Testimonial added successfully');
     }
 
     /** @test */
