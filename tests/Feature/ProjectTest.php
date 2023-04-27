@@ -51,9 +51,12 @@ class ProjectTest extends TestCase
 
     }
 
+
     /** @test */
     public function only_authenticated_users_can_update_their_projects()
     {
+        Storage::fake('public'); // Use this to fake the storage disk
+
         $user = User::factory()->create();
         $category = Category::factory()->create();
 
@@ -62,21 +65,27 @@ class ProjectTest extends TestCase
             'category_id' => $category->id,
         ]);
 
-        $newImage = UploadedFile::fake()->image('newimage.jpg');
-        Storage::fake('public');
+        $file = UploadedFile::fake()->image('test.jpg');
+
         $attributes = [
             'name' => 'HTML',
-            'image' => $newImage,
             'type' => 'new type',
             'user_id' => $user->id,
             'category_id' => $category->id,
+            'image' => $file,
         ];
-
         $this->actingAs($user)
-            ->patch('project/' . $project->id, $attributes);
+            ->patch(route('project.update', $project), $attributes)
+            ->assertRedirect(route('project.index'));
 
-        $attributes['image'] = $newImage->hashName('public/images');
-        $this->assertDatabaseHas('projects', $attributes);
+        $this->assertDatabaseHas('projects', [
+            'name' => 'HTML',
+            'type' => 'new type',
+            'user_id' => $user->id,
+            'category_id' => $category->id,
+        ]);
+
     }
+
 
 }

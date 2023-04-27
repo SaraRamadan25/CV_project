@@ -14,7 +14,6 @@ class ProjectFactory extends Factory
 
     public function definition()
     {
-        $image = (new FileFactory)->image('newimage', 200, 200);
 
         $userIds = User::pluck('id');
         $randomUserId = $this->faker->randomElement($userIds);
@@ -27,7 +26,7 @@ class ProjectFactory extends Factory
             'user_id' => $randomUserId,
             'type' => $this->faker->name,
             'category_id' => $randomCategoryId,
-            'image' => $image,
+            'image' => fake()->image(),
         ];
     }
 }

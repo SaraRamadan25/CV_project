@@ -6,6 +6,7 @@ use App\Models\Testimonial;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class TestimonialTest extends TestCase
@@ -37,6 +38,9 @@ class TestimonialTest extends TestCase
         $testimonial = Testimonial::factory()->create(['user_id' => $user->id])->toArray();
         unset($testimonial['created_at']);
         unset($testimonial['updated_at']);
+
+        $testimonial['image']=UploadedFile::fake()->image('test.png');
+
 
         $this->post('/testimonial', $testimonial)
             ->assertRedirect(route('testimonial.index'))

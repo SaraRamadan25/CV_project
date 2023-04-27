@@ -34,13 +34,15 @@ class ServiceTest extends TestCase
     public function only_authenticated_users_can_add_their_services()
     {
         $user = User::factory()->create();
+
         $this->post('/service')->assertStatus(302);
 
         $this->actingAs($user);
-        $attributes = Service::factory()->raw();
-        $this->post('/service', $attributes)->assertRedirect('service')
-        ->assertSessionHas('msg','service added successfully');
 
+        $attributes = Service::factory()->raw();
+        $this->post('/service', $attributes)
+            ->assertRedirect('service')
+        ->assertSessionHas('msg','service added successfully');
         $this->assertDatabaseHas('services', $attributes);
     }
 
