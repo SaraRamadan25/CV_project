@@ -16,12 +16,17 @@ class ExperienceTest extends TestCase
 
     public function only_authenticated_users_can_add_their_experience()
     {
+        // sad path
+
         $experience = Experience::factory()->create();
         $user = User::factory()->create();
         $this->get('/experience')->assertRedirect('/login');
+        $this->post('/experience',$experience->toArray());
+        $this->assertDatabaseMissing('experiences',$experience->toArray());
+
+        // happy path
 
         $experience->users()->attach($user->id);
-
         $attributes = $experience->toArray();
         $attributes['experience_id'] = $experience->id;
 
@@ -44,9 +49,10 @@ class ExperienceTest extends TestCase
      */
     public function only_authenticated_users_can_update_their_experience()
     {
+        // sad path
+
         $user = User::factory()->create();
         $experience = Experience::factory()->create();
-        $experience->users()->attach($user->id);
 
         $updatedExperienceAttributes = [
             'name' => 'New Name',
@@ -54,6 +60,16 @@ class ExperienceTest extends TestCase
             'description' => 'new description',
             'experience_id' => $experience->id,
         ];
+
+        $this->patch('/experience/' . $experience->id, $updatedExperienceAttributes)
+        ->assertRedirect('/login');
+        $this->assertDatabaseMissing('experiences', $experience->toArray());
+        $this->assertDatabaseMissing('experiences', $updatedExperienceAttributes);
+
+
+        // happy path
+
+        $experience->users()->attach($user->id);
 
         $this->actingAs($user)
             ->patch('/experience/' . $experience->id, $updatedExperienceAttributes)

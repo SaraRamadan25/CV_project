@@ -16,14 +16,20 @@ class EducationTest extends TestCase
 
     public function only_authenticated_users_can_add_their_education()
     {
+        // sad path
+
         $education = Education::factory()->create();
         $user = User::factory()->create();
         $this->get('/education')->assertRedirect('/login');
+        $this->post('/education', $education->toArray())->assertRedirect('/login');
+        $this->assertDatabaseMissing('educations',$education->toArray());
 
-        $education->users()->attach($user->id);
+        // happy path
 
         $attributes = $education->toArray();
         $attributes['education_id'] = $education->id;
+
+        $education->users()->attach($user->id);
 
         $this->actingAs($user)
             ->post('/education', $attributes)
@@ -44,9 +50,10 @@ class EducationTest extends TestCase
      */
     public function only_authenticated_users_can_update_their_education()
     {
+        // sad path
+
         $user = User::factory()->create();
         $education = Education::factory()->create();
-        $education->users()->attach($user->id);
 
         $updatedEducationAttributes = [
             'name' => 'New Name',
@@ -55,7 +62,15 @@ class EducationTest extends TestCase
             'education_id' => $education->id,
         ];
 
+        $this->post('/education',$updatedEducationAttributes)->assertRedirect('/login');
+        $this->assertDatabaseMissing('educations',$education->toArray());
+        $this->assertDatabaseMissing('educations',$updatedEducationAttributes);
+
+        // happy path
+
+        $education->users()->attach($user->id);
         $this->actingAs($user)
+
             ->patch('/education/' . $education->id, $updatedEducationAttributes)
             ->assertRedirect(route('education.index'))
             ->assertSessionHas('msg', 'education updated successfully');
