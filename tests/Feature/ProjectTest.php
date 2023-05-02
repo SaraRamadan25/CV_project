@@ -34,22 +34,35 @@ class ProjectTest extends TestCase
 
     /** @test */
 
-    public function only_authenticated_users_can_add_projects(){
-
+    public function test_only_authenticated_users_can_add_projects()
+    {
         $user = User::factory()->create();
         $category = Category::factory()->create();
-        $this->post('/project')->assertStatus(302);
+        $project = Project::factory()->make()->toArray();
+        $this->post('/project', $project)->assertStatus(302);
 
         $this->actingAs($user);
-        $attributes = Project::factory()->create(['category_id' => $category->id])->toArray();
 
-        unset($attributes['created_at']);
-        unset($attributes['updated_at']);
+        $project = Project::factory()->make([
+            'user_id' => $user->id,
+            'category_id' => $category->id,
+        ])->toArray();
 
-        $this->post('/project',$attributes);
-        $this->assertDatabaseHas('projects',$attributes);
+        $project['image'] = UploadedFile::fake()->image('test.png');
 
+        $this->post('/project', $project)
+            ->assertStatus(302)
+            ->assertRedirect('/project');
+
+        $project = Project::latest()->first();
+
+        unset($project['created_at']);
+        unset($project['updated_at']);
+
+        $this->assertDatabaseHas('projects', $project->toArray());
+        Storage::disk('public')->assertExists($project->image_path);
     }
+
 
 
     /** @test */

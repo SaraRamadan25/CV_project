@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Education;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -25,11 +24,11 @@ class EducationTest extends TestCase
         $this->assertDatabaseMissing('educations',$education->toArray());
 
         // happy path
+        $education->users()->attach($user->id);
 
         $attributes = $education->toArray();
         $attributes['education_id'] = $education->id;
 
-        $education->users()->attach($user->id);
 
         $this->actingAs($user)
             ->post('/education', $attributes)
@@ -69,8 +68,8 @@ class EducationTest extends TestCase
         // happy path
 
         $education->users()->attach($user->id);
-        $this->actingAs($user)
 
+        $this->actingAs($user)
             ->patch('/education/' . $education->id, $updatedEducationAttributes)
             ->assertRedirect(route('education.index'))
             ->assertSessionHas('msg', 'education updated successfully');
@@ -87,7 +86,5 @@ class EducationTest extends TestCase
             'education_id' => $education->id,
         ]);
     }
-
-
 
 }

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class TestimonialTest extends TestCase
@@ -26,8 +27,8 @@ class TestimonialTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->get('/testimonial/create');
-        $response->assertStatus(302);
+         $this->get('/testimonial/create')
+        ->assertStatus(302);
 
         $this->actingAs($user)
             ->get('/testimonial/create')
@@ -41,24 +42,31 @@ class TestimonialTest extends TestCase
 
         $testimonial['image']=UploadedFile::fake()->image('test.png');
 
-
         $this->post('/testimonial', $testimonial)
             ->assertRedirect(route('testimonial.index'))
             ->assertSessionHas('msg', 'Testimonial added successfully');
+        $this->assertDatabaseHas('testimonials', $testimonial);
+
     }
 
     /** @test */
 
     public function only_authenticated_users_can_update_testimonials(){
+        Storage::fake('public'); // Use this to fake the storage disk
+
         $user = User::factory()->create();
 
         $testimonial = Testimonial::factory()->create(['user_id' => $user->id]);
+
+        $file = UploadedFile::fake()->image('test.png');
 
         $attributes = [
             'name' => 'HTML',
             'description' => 'new description',
             'role' => 'manager',
             'user_id' => $user->id,
+            'image' => $file,
+
         ];
 
         $this->actingAs($user)

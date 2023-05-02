@@ -27,7 +27,7 @@ class TestimonialController extends Controller
     public function store(TestimonialRequest $request): RedirectResponse
     {
         $img = $request->file('image');
-        $ext = $img->getClientOriginalExtension();
+        $ext = $img->extension();
         $image_name = "testimonial-$request->id.$ext";
         $img->move(public_path('storage/app/uploadedPhotos'),$image_name);
 
