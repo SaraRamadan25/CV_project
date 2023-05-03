@@ -42,10 +42,12 @@
                             @foreach($testimonials as $testimonial)
                             <div class="item">
                                 <figure class="thumb">
-                                    <div class="tm-hex" style="background-image: url('assets/theme/images/tm.jpg');">
+                                    <div class="tm-hex" style="background-image: url('{{ asset('storage/testimonials/'.$testimonial->image) }}');">
                                         <div class="hexTop"></div>
                                         <div class="hexBottom"></div>
                                     </div>
+
+
                                     <figcaption>
                                         <h4> {{ $testimonial->name }}</h4>
                                         <span> {{ $testimonial->role }}</span>

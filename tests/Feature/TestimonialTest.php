@@ -23,57 +23,66 @@ class TestimonialTest extends TestCase
 
     /** @test */
 
-    public function only_authenticated_users_can_add_testimonials()
+    public function test_only_authenticated_users_can_add_testimonials()
     {
         $user = User::factory()->create();
+        $testimonial = Testimonial::factory()->make()->toArray();
+        $this->post('/testimonial', $testimonial)->assertStatus(302);
 
-         $this->get('/testimonial/create')
-        ->assertStatus(302);
+        $this->actingAs($user);
 
-        $this->actingAs($user)
-            ->get('/testimonial/create')
-            ->assertStatus(200);
+        $testimonial = Testimonial::factory()->make([
+            'user_id' => $user->id,
+        ])->toArray();
 
+        $testimonial['image'] = UploadedFile::fake()->image('test.png');
 
-        // Create a testimonial with the authenticated user and assert that it was added successfully
-        $testimonial = Testimonial::factory()->create(['user_id' => $user->id])->toArray();
+        $this->post('/testimonial', $testimonial)
+            ->assertStatus(302)
+            ->assertRedirect('/testimonial');
+
+        $testimonial = Testimonial::latest()->first();
+
         unset($testimonial['created_at']);
         unset($testimonial['updated_at']);
 
-        $testimonial['image']=UploadedFile::fake()->image('test.png');
-
-        $this->post('/testimonial', $testimonial)
-            ->assertRedirect(route('testimonial.index'))
-            ->assertSessionHas('msg', 'Testimonial added successfully');
-        $this->assertDatabaseHas('testimonials', $testimonial);
-
+        $this->assertDatabaseHas('testimonials', $testimonial->toArray());
+        Storage::disk('public')->assertExists($testimonial['image_path']);
     }
 
     /** @test */
 
-    public function only_authenticated_users_can_update_testimonials(){
+    public function only_authenticated_users_can_update_testimonials()
+    {
         Storage::fake('public'); // Use this to fake the storage disk
 
         $user = User::factory()->create();
 
-        $testimonial = Testimonial::factory()->create(['user_id' => $user->id]);
+        $testimonial = Testimonial::factory()->create([
+            'user_id' => $user->id,
+        ]);
 
-        $file = UploadedFile::fake()->image('test.png');
+        $file = UploadedFile::fake()->image('test.jpg');
 
         $attributes = [
             'name' => 'HTML',
             'description' => 'new description',
-            'role' => 'manager',
             'user_id' => $user->id,
             'image' => $file,
-
         ];
 
         $this->actingAs($user)
-            ->patch('testimonial/' . $testimonial->id, $attributes)
-            ->assertRedirect(route('testimonial.index'))
-            ->assertSessionHas('msg', 'Testimonial updated successfully');
-        $this->assertDatabaseHas('testimonials', $attributes);
+            ->patch(route('testimonial.update', $testimonial), $attributes)
+            ->assertRedirect(route('testimonial.index'));
+
+        $this->assertDatabaseHas('testimonials', [
+            'name' => 'HTML',
+            'description' => 'new description',
+            'user_id' => $user->id,
+        ]);
+
+        Storage::disk('public')->assertExists($testimonial->image_path);
     }
+
 
 }

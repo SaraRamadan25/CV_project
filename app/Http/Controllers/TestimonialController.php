@@ -10,11 +10,13 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class TestimonialController extends Controller
 {
     public function index(): Factory|View|Application
     {
+
         $user = Auth::user();
         $testimonials = $user->testimonials;
 
@@ -24,23 +26,24 @@ class TestimonialController extends Controller
     {
         return view('testimonial.create');
     }
-    public function store(TestimonialRequest $request): RedirectResponse
+    public function store(TestimonialRequest $request)
     {
-        $img = $request->file('image');
-        $ext = $img->extension();
-        $image_name = "testimonial-$request->id.$ext";
-        $img->move(public_path('storage/app/uploadedPhotos'),$image_name);
+        $file = $request->file('image');
+        $extension = $file->extension();
+        $filename = uniqid() . '.' . $extension;
+
+        Storage::disk('public')->putFileAs('testimonials', $file, $filename);
 
         Testimonial::create([
-            'name'=>$request->name,
-            'role'=>$request->role,
-            'description'=>$request->description,
-            'image'=>$image_name,
-            'user_id'=>Auth::id()
-
+            'name' => $request->name,
+            'role' => $request->role,
+            'description' => $request->description,
+            'image' => $filename,
+            'user_id' => Auth::id()
         ]);
-        return redirect()->route('testimonial.index')->with('msg','Testimonial added successfully');
+        return redirect()->route('testimonial.index')->with('msg', 'Testimonial added successfully');
     }
+
 
     public function edit(Testimonial $testimonial): Factory|View|Application
     {
@@ -51,10 +54,14 @@ class TestimonialController extends Controller
     public function update(TestimonialRequest $request,Testimonial $testimonial): RedirectResponse
     {
         $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('public/images');
+            $data['image'] = $imagePath;
+        }
+
         $testimonial->update($data);
 
         return redirect()->route('testimonial.index')->with('msg','Testimonial updated successfully');
     }
-
 
 }
