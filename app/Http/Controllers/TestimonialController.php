@@ -51,17 +51,21 @@ class TestimonialController extends Controller
         return view ('testimonial.edit',compact ('testimonial'));
 
     }
-    public function update(TestimonialRequest $request,Testimonial $testimonial): RedirectResponse
+    public function update(TestimonialRequest $request, Testimonial $testimonial): RedirectResponse
     {
         $data = $request->validated();
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('public/images');
-            $data['image'] = $imagePath;
-        }
+            $file = $request->file('image');
+            $extension = $file->extension();
+            $filename = uniqid() . '.' . $extension;
 
+            Storage::disk('public')->putFileAs('testimonials', $file, $filename);
+            $data['image'] = $filename;
+        }
         $testimonial->update($data);
 
-        return redirect()->route('testimonial.index')->with('msg','Testimonial updated successfully');
+        return redirect()->route('testimonial.index')->with('msg', 'Testimonial updated successfully');
     }
+
 
 }

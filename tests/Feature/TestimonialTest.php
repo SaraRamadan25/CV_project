@@ -54,9 +54,10 @@ class TestimonialTest extends TestCase
 
     public function only_authenticated_users_can_update_testimonials()
     {
-        Storage::fake('public'); // Use this to fake the storage disk
+        Storage::fake('public');
 
         $user = User::factory()->create();
+        // $filename = 'test.jpg';
 
         $testimonial = Testimonial::factory()->create([
             'user_id' => $user->id,
@@ -67,6 +68,7 @@ class TestimonialTest extends TestCase
         $attributes = [
             'name' => 'HTML',
             'description' => 'new description',
+            'role'=>'CEO',
             'user_id' => $user->id,
             'image' => $file,
         ];
@@ -75,14 +77,21 @@ class TestimonialTest extends TestCase
             ->patch(route('testimonial.update', $testimonial), $attributes)
             ->assertRedirect(route('testimonial.index'));
 
+        $updated_testimonial = Testimonial::find($testimonial->id);
+        $renamed_filename = $updated_testimonial->image;
+
         $this->assertDatabaseHas('testimonials', [
             'name' => 'HTML',
             'description' => 'new description',
+            'role'=>'CEO',
             'user_id' => $user->id,
+            'image' => $renamed_filename, // check for the renamed filename
         ]);
 
-        Storage::disk('public')->assertExists($testimonial->image_path);
+        Storage::disk('public')->assertExists('testimonials/' . $renamed_filename);
     }
+
+
 
 
 }
