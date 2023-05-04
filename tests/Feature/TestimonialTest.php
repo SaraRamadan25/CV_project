@@ -23,8 +23,10 @@ class TestimonialTest extends TestCase
 
     /** @test */
 
-    public function test_only_authenticated_users_can_add_testimonials()
+    public function only_authenticated_users_can_add_testimonials()
     {
+        Storage::fake('public');
+
         $user = User::factory()->create();
         $testimonial = Testimonial::factory()->make()->toArray();
         $this->post('/testimonial', $testimonial)->assertStatus(302);
@@ -35,7 +37,10 @@ class TestimonialTest extends TestCase
             'user_id' => $user->id,
         ])->toArray();
 
-        $testimonial['image'] = UploadedFile::fake()->image('test.png');
+        $testImage = UploadedFile::fake()->image('test.jpg');
+        Storage::disk('public')->put('testimonials/test.jpg', file_get_contents($testImage));
+
+        $testimonial['image'] = $testImage;
 
         $this->post('/testimonial', $testimonial)
             ->assertStatus(302)
@@ -47,7 +52,7 @@ class TestimonialTest extends TestCase
         unset($testimonial['updated_at']);
 
         $this->assertDatabaseHas('testimonials', $testimonial->toArray());
-        Storage::disk('public')->assertExists($testimonial['image_path']);
+        Storage::disk('public')->assertExists('testimonials/test.jpg');
     }
 
     /** @test */

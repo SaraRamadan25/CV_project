@@ -36,7 +36,7 @@ public function index(): Factory|View|Application
         Project::create([
             'name'=>$request->name,
             'type'=>$request->type,
-            'image' => $request['image']->store('photos', 'public'),
+            'image' => $request['image']->store('images', 'public'),
             'category_id'=>$request->category_id,
             'user_id'=>auth()->id()
         ]);
