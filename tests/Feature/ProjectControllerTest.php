@@ -11,7 +11,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class ProjectTest extends TestCase
+class ProjectControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 

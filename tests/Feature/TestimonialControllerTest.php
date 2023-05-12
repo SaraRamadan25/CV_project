@@ -10,7 +10,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class TestimonialTest extends TestCase
+class TestimonialControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 

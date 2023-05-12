@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class HomeTest extends TestCase
+class HomeControllerTest extends TestCase
 {    use RefreshDatabase, WithFaker;
 
     /**
@@ -29,12 +29,16 @@ class HomeTest extends TestCase
     }
 
     /** @test */
+    public function gusts_cannot_see_the_welcome_page(){
+    $user = User::factory()->create();
+    $this->get('/welcome', ['user_id' => $user->id])->assertStatus(302);
+}
+
+    /** @test */
 
     public function only_authenticated_users_can_see_the_welcome_page(){
 
         $user = User::factory()->create();
-        $this->get('/welcome')->assertStatus(302);
-
         $this->actingAs($user);
         $this->get('/welcome')->assertStatus(200);
   }
