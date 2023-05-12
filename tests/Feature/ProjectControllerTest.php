@@ -63,8 +63,6 @@ class ProjectControllerTest extends TestCase
         Storage::disk('public')->assertExists($project->image_path);
     }
 
-
-
     /** @test */
     public function only_authenticated_users_can_update_their_projects()
     {

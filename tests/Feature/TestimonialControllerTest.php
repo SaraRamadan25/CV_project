@@ -62,7 +62,6 @@ class TestimonialControllerTest extends TestCase
         Storage::fake('public');
 
         $user = User::factory()->create();
-        // $filename = 'test.jpg';
 
         $testimonial = Testimonial::factory()->create([
             'user_id' => $user->id,
