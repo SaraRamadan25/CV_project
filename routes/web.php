@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('project', ProjectController::class);
 
+
     Route::resource('testimonial', TestimonialController::class);
 
     Route::resource('service', ServiceController::class);

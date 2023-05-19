@@ -23,8 +23,8 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <ul class="filter list-inline">
-                            <li><a href="/categories" class="active">All</a></li>
-                            <li><a href="/categories/{{ $category->name }}" >{{ $category->name }}</a></li>
+                            <li><a href="/category" class="active">All</a></li>
+                            <li><a href="/category/{{ $category->name }}" >{{ $category->name }}</a></li>
 
                         </ul>
                     </div>

@@ -20,7 +20,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <ul class="filter list-inline">
-                            <li><a href="/categories" class="active" data-filter="*">All</a></li>
+                            <li><a href="/category" class="active" data-filter="*">All</a></li>
                             @foreach ($categories as $category)
                             <li><a href={{ route('category.show',$category->name) }} >{{ $category->name }}</a></li>
                             @endforeach

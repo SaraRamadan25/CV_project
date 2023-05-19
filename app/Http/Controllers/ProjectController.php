@@ -65,4 +65,5 @@ public function index(): Factory|View|Application
 
     }
 
+
 }

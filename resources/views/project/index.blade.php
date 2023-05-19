@@ -28,9 +28,10 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <ul class="filter list-inline">
-                            <li><a href="/categories" class="active" data-filter="*">All</a></li>
+                            <li><a href="/category" class="active" data-filter="*">All</a></li>
                             @foreach($categories as $category)
-                            <li><a href="/categories/{{ $category->name }}" >{{ $category->name }}</a></li>
+                                <a href="{{ route('project.show', $category->name) }}">{{ $category->name }}</a>
+
                             @endforeach
                  {{--           <li><a href="#" data-filter=".Illustrator">Illustrator</a></li>
                             <li><a href="#" data-filter=".Indesign">Indesign</a></li>
