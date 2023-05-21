@@ -33,13 +33,4 @@ jobs:
         DB_DATABASE: database/database.mysql
       run: vendor/bin/phpunit
 
-    - name: Debug Database Connection
-      run: env | grep DB_
-
-    - name: Clear Application Cache
-      run: php artisan cache:clear
-
-    - name: Run Database Migrations
-      run: php artisan migrate --force
-
 
