@@ -18,7 +18,7 @@ class CategoryController extends Controller
         return view('category.index',compact('categories','projects'));
     }
 
-        public function show(Category $category): Factory|View|Application
+        public function show(Category $category): Factory|View
         {
         $projects = $category->projects;
 

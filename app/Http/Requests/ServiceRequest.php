@@ -26,6 +26,7 @@ class ServiceRequest extends FormRequest
         return [
             'name'=>'required|max:255',
             'description'=>'required|max:500',
+            'user_id'=>'required|exists:users,id',
         ];
     }
 }

@@ -74,7 +74,6 @@ class UserController extends Controller
     }
     public function update(UserRequest $request,User $user): RedirectResponse
     {
-
         $data = $request->validated();
 
         $user->educations()
