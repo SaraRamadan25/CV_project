@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
+use JetBrains\PhpStorm\Pure;
 
 class TestimonialController extends Controller
 {
@@ -28,24 +29,26 @@ class TestimonialController extends Controller
 
         Storage::disk('public')->putFileAs('testimonials', $file, $filename);
 
-        return response(Testimonial::create([
+        $testimonial = Testimonial::create([
             'name' => $request['name'],
             'role' => $request['role'],
             'description' => $request['description'],
             'image' => $filename,
             'user_id' => $request['user_id'],
-        ]), 200);
+        ]);
+
+        return response(new TestimonialResource($testimonial), 200);
     }
 
-    public function show(Testimonial $testimonial): Testimonial
+    #[Pure] public function show(Testimonial $testimonial): TestimonialResource
     {
-        return $testimonial;
+        return new TestimonialResource($testimonial);
     }
 
-    public function update(Request $request, Testimonial $testimonial): Testimonial
+    public function update(Request $request, Testimonial $testimonial): TestimonialResource
     {
          $testimonial->update($request->all());
-         return $testimonial;
+        return new TestimonialResource($testimonial);
     }
 
     public function destroy(Testimonial $testimonial)

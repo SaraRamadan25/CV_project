@@ -12,6 +12,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use JetBrains\PhpStorm\Pure;
 
 class SkillController extends Controller
 {
@@ -30,15 +31,15 @@ class SkillController extends Controller
         ]), 200);
     }
 
-    public function show(Skill $skill): Skill
+    #[Pure] public function show(Skill $skill): SkillResource
     {
-        return $skill;
+        return new SkillResource($skill);
     }
 
-    public function update(Request $request, Skill $skill): JsonResponse
+    public function update(Request $request, Skill $skill): SkillResource
     {
         $skill->update($request->all());
-        return response()->json(['message' => 'Skill updated successfully'], 200);
+        return new SkillResource($skill);
     }
 
     public function destroy(Skill $skill): JsonResponse

@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use JetBrains\PhpStorm\Pure;
 
 class CategoryController extends Controller
 {
@@ -30,9 +31,10 @@ class CategoryController extends Controller
     }
 
 
-    public function show(Category $category): Category
+    #[Pure] public function show(Category $category): CategoryResource
     {
-        return $category;
+         return new CategoryResource($category);
+
     }
 
 

@@ -9,6 +9,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use JetBrains\PhpStorm\Pure;
 
 class ProjectController extends Controller
 {
@@ -30,15 +31,15 @@ class ProjectController extends Controller
 
     }
 
-    public function show(Project $project): Project
+    #[Pure] public function show(Project $project): ProjectResource
     {
-        return $project;
+        return new ProjectResource($project);
     }
 
-    public function update(Request $request, Project $project): Project
+    public function update(Request $request, Project $project): ProjectResource
     {
          $project->update($request->all());
-         return $project;
+         return new ProjectResource($project);
     }
 
     public function destroy(Project $project)

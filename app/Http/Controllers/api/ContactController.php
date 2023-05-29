@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use JetBrains\PhpStorm\Pure;
 
 class ContactController extends Controller
 {
@@ -24,15 +25,15 @@ class ContactController extends Controller
         return Contact::create($request->all());
     }
 
-    public function show(Contact $contact): Contact
+    #[Pure] public function show(Contact $contact): ContactResource
     {
-        return $contact;
+        return new ContactResource($contact);
     }
 
-    public function update(ContactRequest $request, Contact $contact): Contact
+    public function update(ContactRequest $request, Contact $contact): ContactResource
     {
          $contact->update($request->all());
-            return $contact;
+         return new ContactResource($contact);
     }
 
     public function destroy(Contact $contact)

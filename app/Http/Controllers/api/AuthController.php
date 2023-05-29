@@ -41,4 +41,28 @@ class AuthController extends Controller
             'token_type'=>'token',
         ]);
     }
+
+    public function logout(Request $request): JsonResponse
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'message'=>'logout'
+        ]);
+    }
+
+    public function login(Request $request): JsonResponse
+    {
+        $user = User::where('email', $request->email)->first();
+        if (!$user || !Hash::check($request->password,$user->password)) {
+            return response()->json([
+                'message'=>'bad credentials'
+            ], 401);
+        }
+        $token = $user->createToken('auth_token')->plainTextToken;
+        return response()->json([
+            'user'=>$user,
+            'access_token'=>$token,
+            'token_type'=>'token',
+        ]);
+    }
 }

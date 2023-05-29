@@ -8,6 +8,7 @@ use App\Http\Resources\EducationResource;
 use App\Models\Education;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use JetBrains\PhpStorm\Pure;
 
 class EducationController extends Controller
 {
@@ -18,26 +19,26 @@ class EducationController extends Controller
 
     }
 
-    public function store(EducationRequest $request)
+    public function store(EducationRequest $request): EducationResource
     {
-        $education = Education::create($request->all());
 
+        $education = Education::create($request->all());
         $education->users()->attach($request->user_id);
 
-        return $education;
+        return new EducationResource($education);
     }
 
 
-    public function show(Education $education): Education
+    #[Pure] public function show(Education $education): EducationResource
     {
-        return $education;
+        return new EducationResource($education);
     }
 
 
-    public function update(EducationRequest $request, Education $education)
+    public function update(EducationRequest $request, Education $education): EducationResource
     {
         $education->update($request->all());
-        return $education;
+        return new EducationResource($education);
     }
 
     public function destroy(Education $education)

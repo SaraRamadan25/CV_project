@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use JetBrains\PhpStorm\Pure;
 
 class ServiceController extends Controller
 {
@@ -22,19 +23,19 @@ class ServiceController extends Controller
 
     public function store(ServiceRequest $request): Response
     {
-        return Service::create($request->all());
-
+        $service = Service::create($request->all());
+        return response($service, 200);
     }
 
-    public function show(Service $service): Service
+    #[Pure] public function show(Service $service): ServiceResource
     {
-        return $service;
+        return new ServiceResource($service);
     }
 
-    public function update(ServiceRequest $request, Service $service): Service
+    public function update(ServiceRequest $request, Service $service): ServiceResource
     {
          $service->update($request->all());
-            return $service;
+        return new ServiceResource($service);
     }
 
     public function destroy(Service $service)
