@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::apiResource('contact', ContactController::class);
 
 Route::post('/register', [AuthController::class, 'register']
 );
@@ -41,6 +40,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('experience', ExperienceController::class);
     Route::apiResource('education', EducationController::class);
     Route::apiResource('skill', SkillController::class);
+    Route::post('contact', [ContactController::class,'store']);
+
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 

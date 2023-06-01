@@ -15,20 +15,11 @@ use JetBrains\PhpStorm\Pure;
 class ContactController extends Controller
 {
 
-    public function index(): AnonymousResourceCollection
-    {
-        return ContactResource::collection(Contact::all());
-    }
-
     public function store(ContactRequest $request): Contact
     {
         return Contact::create($request->all());
     }
 
-    #[Pure] public function show(Contact $contact): ContactResource
-    {
-        return new ContactResource($contact);
-    }
 
     public function update(ContactRequest $request, Contact $contact): ContactResource
     {
@@ -36,8 +27,5 @@ class ContactController extends Controller
          return new ContactResource($contact);
     }
 
-    public function destroy(Contact $contact)
-    {
-        $contact->delete();
-    }
+
 }

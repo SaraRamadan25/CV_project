@@ -11,7 +11,8 @@ class CategoryResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'projects' => ProjectResource::collection($this->whenLoaded('projects')),
+            'projects' => ProjectResource::collection($this->projects),
         ];
     }
+
 }

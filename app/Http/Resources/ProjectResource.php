@@ -12,8 +12,8 @@ class ProjectResource extends JsonResource
             'name'=>$this->name,
             'type'=>$this->type,
             'image'=>$this->image,
-            'category_id'=>$this->category_id,
-            'user_id'=>$this->user_id,
+            'category' => $this->category->name,
+            'user' => $this->user->name,
         ];
     }
 }
