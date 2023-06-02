@@ -43,7 +43,6 @@ class SkillController extends Controller
     public function destroy(Skill $skill): JsonResponse
     {
         $skill->delete();
-
-        return response()->json(['message' => 'Skill deleted successfully'], 200);
+        return response()->json(['message' => 'Skill deleted successfully']);
     }
 }

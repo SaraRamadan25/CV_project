@@ -9,6 +9,7 @@ use App\Models\Service;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
@@ -38,8 +39,9 @@ class ServiceController extends Controller
         return new ServiceResource($service);
     }
 
-    public function destroy(Service $service)
+    public function destroy(Service $service): JsonResponse
     {
         $service->delete();
+        return response()->json(['message' => 'Service deleted successfully']);
     }
 }

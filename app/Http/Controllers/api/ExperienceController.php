@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ExperienceRequest;
 use App\Http\Resources\ExperienceResource;
 use App\Models\Experience;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use JetBrains\PhpStorm\Pure;
@@ -38,8 +39,9 @@ class ExperienceController extends Controller
         return new ExperienceResource($experience);
     }
 
-    public function destroy(Experience $experience)
+    public function destroy(Experience $experience): JsonResponse
     {
         $experience->delete();
+        return response()->json(['message' => 'Experience deleted successfully']);
     }
 }

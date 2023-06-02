@@ -7,6 +7,7 @@ use App\Http\Requests\TestimonialRequest;
 use App\Http\Resources\TestimonialResource;
 use App\Models\Testimonial;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
@@ -51,8 +52,10 @@ class TestimonialController extends Controller
         return new TestimonialResource($testimonial);
     }
 
-    public function destroy(Testimonial $testimonial)
+    public function destroy(Testimonial $testimonial): JsonResponse
     {
         $testimonial->delete();
+        return response()->json(['message' => 'Testimonial deleted successfully']);
+
     }
 }

@@ -39,7 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('experience', ExperienceController::class);
     Route::apiResource('education', EducationController::class);
     Route::apiResource('skill', SkillController::class);
-    Route::post('contact', [ContactController::class,'store']);
+    Route::apiResource('contact', ContactController::class)->only(['update', 'store']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

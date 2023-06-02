@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\EducationRequest;
 use App\Http\Resources\EducationResource;
 use App\Models\Education;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use JetBrains\PhpStorm\Pure;
@@ -38,8 +39,9 @@ class EducationController extends Controller
         return new EducationResource($education);
     }
 
-    public function destroy(Education $education)
+    public function destroy(Education $education): JsonResponse
     {
         $education->delete();
+        return response()->json(['message' => 'Education deleted successfully']);
     }
 }

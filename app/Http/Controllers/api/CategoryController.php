@@ -30,13 +30,10 @@ class CategoryController extends Controller
 
     }
 
-
     #[Pure] public function show(Category $category): CategoryResource
     {
          return new CategoryResource($category);
-
     }
-
 
     public function update(Request $request, Category $category): JsonResponse
     {
