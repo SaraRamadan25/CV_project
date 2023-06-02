@@ -42,9 +42,7 @@ class CategoryController extends Controller
     {
         $category->update($request->all());
         return response()->json(['message' => 'Category updated successfully'], 200);
-
     }
-
 
     public function destroy(Category $category): JsonResponse
     {

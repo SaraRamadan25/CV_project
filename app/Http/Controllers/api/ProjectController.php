@@ -18,17 +18,13 @@ class ProjectController extends Controller
         return ProjectResource::collection(Project::all());
     }
 
-    public function store(ProjectRequest $request) :Response
+    public function store(ProjectRequest $request) : Response
     {
-        return response(Project::create([
-            'name' => $request['name'],
-            'type' => $request['type'],
-            'image' =>  $request['image']->store('images', 'public'),
-            'user_id' => $request['user_id'],
-            'category_id' => $request['category_id'],
+        $attributes = $request->validated();
+        $attributes['image'] = $request->file('image')->store('images', 'public');
 
-        ]), 200);
-
+        $project = Project::create($attributes);
+        return response($project, 200);
     }
 
     #[Pure] public function show(Project $project): ProjectResource
@@ -36,9 +32,9 @@ class ProjectController extends Controller
         return new ProjectResource($project);
     }
 
-    public function update(Request $request, Project $project): ProjectResource
+    public function update(ProjectRequest $request, Project $project): ProjectResource
     {
-         $project->update($request->all());
+         $project->update($request->validated());
          return new ProjectResource($project);
     }
 

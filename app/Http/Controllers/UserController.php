@@ -48,7 +48,7 @@ class UserController extends Controller
             'expert_in'=>$request->expert_in,
             'speeches'=>$request->speeches,
             'image'=>$image_name,
-            'freelance'=>$request->freelance
+            'freelance'=>$request->freelance,
 
         ]);
         $user = Auth::user();

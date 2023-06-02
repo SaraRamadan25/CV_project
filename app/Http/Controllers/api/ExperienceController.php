@@ -20,7 +20,7 @@ class ExperienceController extends Controller
 
     public function store(ExperienceRequest $request): ExperienceResource
     {
-        $experience = Experience::create($request->all());
+        $experience = Experience::create($request->validated());
         $experience->users()->attach($request->user_id);
 
         return new ExperienceResource($experience);
@@ -34,7 +34,7 @@ class ExperienceController extends Controller
 
     public function update(ExperienceRequest $request, Experience $experience): ExperienceResource
     {
-        $experience->update($request->all());
+        $experience->update($request->validated());
         return new ExperienceResource($experience);
     }
 

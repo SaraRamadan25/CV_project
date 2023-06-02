@@ -24,11 +24,9 @@ class SkillController extends Controller
 
     public function store(SkillRequest $request): Response|Application|ResponseFactory
     {
-        return response(Skill::create([
-            'name' => $request['name'],
-            'percentage' => $request['percentage'],
-            'user_id' => $request['user_id'],
-        ]), 200);
+        $attributes = $request->validated();
+        $skill = Skill::create($attributes);
+        return response ($skill, 200);
     }
 
     #[Pure] public function show(Skill $skill): SkillResource
@@ -36,9 +34,9 @@ class SkillController extends Controller
         return new SkillResource($skill);
     }
 
-    public function update(Request $request, Skill $skill): SkillResource
+    public function update(SkillRequest $request, Skill $skill): SkillResource
     {
-        $skill->update($request->all());
+        $skill->update($request->validated());
         return new SkillResource($skill);
     }
 

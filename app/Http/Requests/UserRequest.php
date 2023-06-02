@@ -21,7 +21,7 @@ class UserRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name'=>'required|max:255',
@@ -34,6 +34,8 @@ class UserRequest extends FormRequest
             'expert_in'=>'required',
             'freelance'=>'required',
             'image'=>'image',
+            'education_id' => 'required|integer|exists:educations,id',
+            'experience_id' => 'required|integer|exists:experiences,id',
         ];
     }
 }

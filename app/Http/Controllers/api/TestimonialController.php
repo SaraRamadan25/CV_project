@@ -45,9 +45,9 @@ class TestimonialController extends Controller
         return new TestimonialResource($testimonial);
     }
 
-    public function update(Request $request, Testimonial $testimonial): TestimonialResource
+    public function update(TestimonialRequest $request, Testimonial $testimonial): TestimonialResource
     {
-         $testimonial->update($request->all());
+         $testimonial->update($request->validated());
         return new TestimonialResource($testimonial);
     }
 
