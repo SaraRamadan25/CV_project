@@ -13,6 +13,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use JetBrains\PhpStorm\Pure;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class TestimonialController extends Controller
 {
@@ -55,7 +56,7 @@ class TestimonialController extends Controller
     public function destroy(Testimonial $testimonial): JsonResponse
     {
         $testimonial->delete();
-        return response()->json(['message' => 'Testimonial deleted successfully']);
+        return response()->json(null, ResponseAlias::HTTP_NO_CONTENT);
 
     }
 }

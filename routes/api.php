@@ -35,7 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('service', ServiceController::class);
     Route::apiResource('testimonial', TestimonialController::class);
     Route::apiResource('project', ProjectController::class);
-    Route::apiResource('category', CategoryController::class);
+    Route::apiResource('category', CategoryController::class)->only(['index', 'show']);
     Route::apiResource('experience', ExperienceController::class);
     Route::apiResource('education', EducationController::class);
     Route::apiResource('skill', SkillController::class);

@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use JetBrains\PhpStorm\Pure;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class ProjectController extends Controller
 {
@@ -25,7 +26,7 @@ class ProjectController extends Controller
         $attributes['image'] = $request->file('image')->store('images', 'public');
 
         $project = Project::create($attributes);
-        return response($project, 200);
+        return response($project, 201);
     }
 
     #[Pure] public function show(Project $project): ProjectResource
@@ -42,6 +43,6 @@ class ProjectController extends Controller
     public function destroy(Project $project): JsonResponse
     {
         $project->delete();
-        return response()->json(['message' => 'Project deleted successfully']);
+        return response()->json(null, ResponseAlias::HTTP_NO_CONTENT);
     }
 }

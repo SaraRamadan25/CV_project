@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use JetBrains\PhpStorm\Pure;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class ServiceController extends Controller
 {
@@ -25,7 +26,7 @@ class ServiceController extends Controller
     public function store(ServiceRequest $request): Response
     {
         $service = Service::create($request->validated());
-        return response($service, 200);
+        return response($service, 201);
     }
 
     #[Pure] public function show(Service $service): ServiceResource
@@ -42,6 +43,6 @@ class ServiceController extends Controller
     public function destroy(Service $service): JsonResponse
     {
         $service->delete();
-        return response()->json(['message' => 'Service deleted successfully']);
+        return response()->json(null, ResponseAlias::HTTP_NO_CONTENT);
     }
 }

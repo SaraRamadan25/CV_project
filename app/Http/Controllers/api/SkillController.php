@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use JetBrains\PhpStorm\Pure;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class SkillController extends Controller
 {
@@ -26,7 +27,7 @@ class SkillController extends Controller
     {
         $attributes = $request->validated();
         $skill = Skill::create($attributes);
-        return response ($skill, 200);
+        return response ($skill, 201);
     }
 
     #[Pure] public function show(Skill $skill): SkillResource
@@ -43,6 +44,6 @@ class SkillController extends Controller
     public function destroy(Skill $skill): JsonResponse
     {
         $skill->delete();
-        return response()->json(['message' => 'Skill deleted successfully']);
+        return response()->json(null, ResponseAlias::HTTP_NO_CONTENT);
     }
 }
