@@ -18,7 +18,8 @@ class CategoryController extends Controller
 
     public function index(): AnonymousResourceCollection
     {
-        return CategoryResource::collection(Category::all());
+        $categories = Category::paginate(4);
+        return CategoryResource::collection($categories);
     }
 
     #[Pure] public function show(Category $category): CategoryResource

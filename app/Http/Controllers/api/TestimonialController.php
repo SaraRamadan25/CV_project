@@ -20,7 +20,8 @@ class TestimonialController extends Controller
 
     public function index(): AnonymousResourceCollection
     {
-        return TestimonialResource::collection(Testimonial::all());
+        $testimonials = Testimonial::with('user:id')->paginate(10);
+        return TestimonialResource::collection($testimonials);
     }
 
     public function store(TestimonialRequest $request): Response
@@ -39,24 +40,24 @@ class TestimonialController extends Controller
             'user_id' => $request['user_id'],
         ]);
 
-        return response(new TestimonialResource($testimonial), 200);
+        return response(new TestimonialResource($testimonial), 201);
     }
 
-    #[Pure] public function show(Testimonial $testimonial): TestimonialResource
+    public function show(Testimonial $testimonial): TestimonialResource
     {
+        $testimonial->load('user:id');
         return new TestimonialResource($testimonial);
     }
 
-    public function update(TestimonialRequest $request, Testimonial $testimonial): TestimonialResource
+    public function update(TestimonialRequest $request, Testimonial $testimonial): JsonResponse
     {
          $testimonial->update($request->validated());
-        return new TestimonialResource($testimonial);
+        return response()->json(['message' => 'Testimonial updated successfully']);
     }
 
     public function destroy(Testimonial $testimonial): JsonResponse
     {
         $testimonial->delete();
         return response()->json(null, ResponseAlias::HTTP_NO_CONTENT);
-
     }
 }

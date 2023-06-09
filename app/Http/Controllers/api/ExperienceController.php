@@ -20,7 +20,8 @@ class ExperienceController extends Controller
 
     public function index(): AnonymousResourceCollection
     {
-        return ExperienceResource::collection(Experience::all());
+        $experiences = Experience::paginate(10);
+        return ExperienceResource::collection($experiences);
     }
 
     public function store(ExperienceRequest $request): Application|ResponseFactory|Response

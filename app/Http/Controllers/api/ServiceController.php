@@ -20,7 +20,8 @@ class ServiceController extends Controller
 {
     public function index(): AnonymousResourceCollection
     {
-        return ServiceResource::collection(Service::all());
+        $services = Service::with('user:id')->get()->paginate(10);
+        return ServiceResource::collection($services);
     }
 
     public function store(ServiceRequest $request): Response
@@ -31,6 +32,7 @@ class ServiceController extends Controller
 
     #[Pure] public function show(Service $service): ServiceResource
     {
+        $service->load('user:id');
         return new ServiceResource($service);
     }
 

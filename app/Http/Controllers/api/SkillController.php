@@ -20,7 +20,8 @@ class SkillController extends Controller
 
     public function index(): AnonymousResourceCollection
     {
-        return SkillResource::collection(Skill::all());
+        $skills = Skill::with('user:id')->get()->paginate(10);
+        return SkillResource::collection($skills);
     }
 
     public function store(SkillRequest $request): Response|Application|ResponseFactory
@@ -32,6 +33,7 @@ class SkillController extends Controller
 
     #[Pure] public function show(Skill $skill): SkillResource
     {
+        $skill->load('user:id');
         return new SkillResource($skill);
     }
 

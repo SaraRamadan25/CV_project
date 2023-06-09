@@ -20,15 +20,16 @@ class EducationController extends Controller
 
     public function index(): AnonymousResourceCollection
     {
-        return EducationResource::collection(Education::all());
+        $educations = Education::paginate(10);
+        return EducationResource::collection($educations);
     }
 
-    public function store(EducationRequest $request): Application|ResponseFactory|Response
+    public function store(EducationRequest $request): JsonResponse
     {
         $education = Education::create($request->validated());
         $education->users()->attach($request->user_id);
 
-        return response($education, 201);
+        return response()->json(['message' => 'Education created successfully']);
     }
 
     #[Pure] public function show(Education $education): EducationResource
@@ -36,10 +37,10 @@ class EducationController extends Controller
         return new EducationResource($education);
     }
 
-    public function update(EducationRequest $request, Education $education): EducationResource
+    public function update(EducationRequest $request, Education $education): JsonResponse
     {
         $education->update($request->validated());
-        return new EducationResource($education);
+        return response()->json(['message' => 'Education updated successfully']);
     }
 
     public function destroy(Education $education): JsonResponse

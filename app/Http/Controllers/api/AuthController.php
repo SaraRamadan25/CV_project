@@ -14,18 +14,7 @@ class AuthController extends Controller
 {
     public function register(UserRequest $request): JsonResponse
     {
-        $user = User::create([
-            'name' => $request->name,
-            'excerpt' => $request->excerpt,
-            'description' => $request->description,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'date_of_birth' => $request->date_of_birth,
-            'expert_in' => $request->expert_in,
-            'speeches' => $request->speeches,
-            'image' => $request->image,
-            'freelance' => $request->freelance,
-        ]);
+        $user = User::create($request->validated());
 
         $user->educations()->sync(request('education_id'));
         $user->experiences()->sync(request('experience_id'));

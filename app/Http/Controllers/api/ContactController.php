@@ -22,11 +22,10 @@ class ContactController extends Controller
         return response()->json(['message' => 'Contact created successfully']);
     }
 
-
-    public function update(ContactRequest $request, Contact $contact): ContactResource
+    public function update(ContactRequest $request, Contact $contact): JsonResponse
     {
          $contact->update($request->validated());
-         return new ContactResource($contact);
+        return response()->json(['message' => 'Contact updated successfully']);
     }
 
 }

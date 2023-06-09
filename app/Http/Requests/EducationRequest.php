@@ -24,7 +24,6 @@ class EducationRequest extends FormRequest
     public function rules()
     {
         return [
-            'education_id'=>'required',
             'name'=>'required',
             'duration'=>'required',
             'description'=>'required',

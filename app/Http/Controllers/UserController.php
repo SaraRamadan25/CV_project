@@ -6,6 +6,7 @@ use App\Http\Requests\UserRequest;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -44,7 +45,7 @@ class UserController extends Controller
             'description'=>$request->description,
             'email'=>$request->email,
             'password'=>$request->password,
-            'date_of_birth'=>$request->date_of_birth,
+            'date_of_birth' => Carbon::createFromFormat('d/m/Y', $request->date_of_birth)->format('d/m/Y'),
             'expert_in'=>$request->expert_in,
             'speeches'=>$request->speeches,
             'image'=>$image_name,

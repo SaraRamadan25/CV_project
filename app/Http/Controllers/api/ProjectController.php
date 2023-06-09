@@ -17,7 +17,8 @@ class ProjectController extends Controller
 {
     public function index(): AnonymousResourceCollection
     {
-        return ProjectResource::collection(Project::all());
+        $projects = Project::with('user:id','category:id')->get()->paginate(10);
+        return ProjectResource::collection($projects);
     }
 
     public function store(ProjectRequest $request) : Response
@@ -31,6 +32,7 @@ class ProjectController extends Controller
 
     #[Pure] public function show(Project $project): ProjectResource
     {
+        $project->load('user:id','category:id');
         return new ProjectResource($project);
     }
 
