@@ -34,6 +34,10 @@
 
                 </div>
               </div>
+                <div class="pagination">
+                    {{ $services->links() }}
+                </div>
+
 
                 <div class="service-hex">
 

@@ -28,12 +28,7 @@ class ExperienceController extends Controller
     }
     public function store(ExperienceRequest $request): RedirectResponse
     {
-
-            Experience::create([
-                'name' => $request->name,
-                'duration' => $request->duration,
-                'description' => $request->description,
-            ]);
+            Experience::create($request->validated());
             return redirect()->route('experience.index')->with('msg','Experience created successfully');
         }
 

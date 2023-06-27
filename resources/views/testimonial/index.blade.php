@@ -58,24 +58,29 @@
                                 </div>
                             </div>
                             @endforeach
-{{--
-                            <div class="item">
-                                <figure class="thumb">
-                                    <div class="tm-hex" style="background-image: url('assets/theme/images/tm-2.jpg');">
-                                        <div class="hexTop"></div>
-                                        <div class="hexBottom"></div>
-                                    </div>
-                                    <figcaption>
-                                        <h4>Adam Drigan</h4>
-                                        <span>CEO, Ultra Solution</span>
-                                    </figcaption>
-                                </figure>
-                                <div class="text">
-                                    <p>Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum
-                                        formas humanitatis per seacula quarta decima. </p>
+
+                                <div class="pagination">
+                                    {{ $testimonials->links() }}
                                 </div>
-                            </div>
---}}
+
+                                {{--
+                                                            <div class="item">
+                                                                <figure class="thumb">
+                                                                    <div class="tm-hex" style="background-image: url('assets/theme/images/tm-2.jpg');">
+                                                                        <div class="hexTop"></div>
+                                                                        <div class="hexBottom"></div>
+                                                                    </div>
+                                                                    <figcaption>
+                                                                        <h4>Adam Drigan</h4>
+                                                                        <span>CEO, Ultra Solution</span>
+                                                                    </figcaption>
+                                                                </figure>
+                                                                <div class="text">
+                                                                    <p>Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum
+                                                                        formas humanitatis per seacula quarta decima. </p>
+                                                                </div>
+                                                            </div>
+                                --}}
 
 
                         </div>

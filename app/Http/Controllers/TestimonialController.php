@@ -16,9 +16,8 @@ class TestimonialController extends Controller
 {
     public function index(): Factory|View|Application
     {
-
         $user = Auth::user();
-        $testimonials = $user->testimonials;
+        $testimonials = $user->testimonials()->with('user:id')->paginate(5);
 
         return view('testimonial.index',compact('testimonials'));
     }
@@ -26,7 +25,7 @@ class TestimonialController extends Controller
     {
         return view('testimonial.create');
     }
-    public function store(TestimonialRequest $request)
+    public function store(TestimonialRequest $request): RedirectResponse
     {
         $file = $request->file('image');
         $extension = $file->extension();
@@ -34,26 +33,18 @@ class TestimonialController extends Controller
 
         Storage::disk('public')->putFileAs('testimonials', $file, $filename);
 
-        Testimonial::create([
-            'name' => $request->name,
-            'role' => $request->role,
-            'description' => $request->description,
-            'image' => $filename,
-            'user_id' => Auth::id()
-        ]);
+        Testimonial::create($request->validated() + ['image' => $filename]);
         return redirect()->route('testimonial.index')->with('msg', 'Testimonial added successfully');
     }
 
-
     public function edit(Testimonial $testimonial): Factory|View|Application
     {
-
         return view ('testimonial.edit',compact ('testimonial'));
-
     }
     public function update(TestimonialRequest $request, Testimonial $testimonial): RedirectResponse
     {
         $data = $request->validated();
+
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $extension = $file->extension();

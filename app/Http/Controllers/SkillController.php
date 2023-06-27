@@ -15,19 +15,12 @@ class SkillController extends Controller
 {
     public function create(): Factory|View|Application
     {
-
         return view('skill.create');
     }
 
     public function store(SkillRequest $request): Redirector|Application|RedirectResponse
     {
-
-        Skill::create([
-            'name'=>$request->name,
-            'percentage'=>$request->percentage,
-            'user_id'=>Auth::id()
-
-        ]);
+        Skill::create($request->validated() + ['user_id'=>Auth::id()]);
 
         return redirect('user')->with('msg','skill added successfully');
     }
@@ -43,7 +36,6 @@ class SkillController extends Controller
         $skill->update($data);
 
         return redirect()->route('user.index')->with('msg', 'skill updated successfully');
-
 
     }
 

@@ -19,7 +19,6 @@ class User extends Authenticatable implements FilamentUser
         'speeches'=>'array',
         'expert_in'=>'array',
         'email_verified_at' => 'datetime',
-
     ];
     protected $fillable = [
         'name',
@@ -32,7 +31,6 @@ class User extends Authenticatable implements FilamentUser
         'excerpt',
         'speeches',
         'image',
-
     ];
 
     protected $hidden = [
@@ -47,7 +45,10 @@ class User extends Authenticatable implements FilamentUser
         } else {
             return 'not available';
         }
+
     }
+
+
 
     public function skills(): HasMany
     {

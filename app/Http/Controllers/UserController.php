@@ -6,7 +6,6 @@ use App\Http\Requests\UserRequest;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -24,7 +23,8 @@ class UserController extends Controller
         return view('user.index',compact('lastAuthenticatedUser','skills'));
     }
 
-    public function create(){
+    public function create(): Factory|View|Application
+    {
         $speeches =['Arabic','English','German','Spanish','French'];
         $expert_in =['UI/UX','Frontend','Backend','Datascience','Data Analysis'];
         $educations = Education::all();
@@ -39,21 +39,9 @@ class UserController extends Controller
         $image_name = "testimonial-$request->id.$ext";
         $img->move(public_path('storage/app/uploadedPhotos'),$image_name);
 
-        User::create([
-            'name'=>$request->name,
-            'excerpt'=>$request->excerpt,
-            'description'=>$request->description,
-            'email'=>$request->email,
-            'password'=>$request->password,
-            'date_of_birth' => Carbon::createFromFormat('d/m/Y', $request->date_of_birth)->format('d/m/Y'),
-            'expert_in'=>$request->expert_in,
-            'speeches'=>$request->speeches,
-            'image'=>$image_name,
-            'freelance'=>$request->freelance,
+        User::create($request->validated() + ['image'=>$image_name]);
 
-        ]);
         $user = Auth::user();
-
         $user->educations()
             ->sync
             (request('education_id'));

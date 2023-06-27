@@ -18,7 +18,7 @@ class ServiceController extends Controller
     {
         $user = Auth::user();
 
-        $services = $user->services;
+        $services = $user->services()->paginate(5);
         return view('service.index',compact('services'));
     }
     public function create(): Factory|View|Application
@@ -27,11 +27,7 @@ class ServiceController extends Controller
     }
     public function store(ServiceRequest $request): RedirectResponse
     {
-        Service::create([
-            'name'=>$request->name,
-            'description'=>$request->description,
-            'user_id'=>auth()->id()
-            ]);
+        Service::create($request->validated() + ['user_id'=>Auth::id()]);
         return redirect('service')->with('msg','service added successfully');
 
     }
