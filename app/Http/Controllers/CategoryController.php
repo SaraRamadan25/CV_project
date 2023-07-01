@@ -52,7 +52,7 @@ class CategoryController extends Controller
             'name' => 'required',
         ]);
         $category->update($data);
-
+        
         return redirect()->route('category.index')->with('msg', 'Category updated successfully');
     }
 

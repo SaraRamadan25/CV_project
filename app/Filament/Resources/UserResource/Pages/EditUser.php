@@ -16,7 +16,6 @@ class EditUser extends EditRecord
     protected function getActions(): array
     {
         return [
-
             Actions\Action::make('changePassword')
                 ->form([
                     TextInput::make('new_password')

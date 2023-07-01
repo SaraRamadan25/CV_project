@@ -33,7 +33,13 @@ public function index(): Factory|View|Application
     }
     public function store(ProjectRequest $request): Redirector|Application|RedirectResponse
     {
-        Project::create($request->validated() + ['user_id'=>Auth::id()] + ['image'=>$request->file('image')->store('public/images')]);
+        Project::create([
+            'name'=>$request->name,
+            'type'=>$request->type,
+            'image' => $request['image']->store('images', 'public'),
+            'category_id'=>$request->category_id,
+            'user_id'=>auth()->id()
+        ]);
 
         return redirect()->route('project.index');
     }

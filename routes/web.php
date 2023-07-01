@@ -24,52 +24,44 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-//guest routes
 Route::get('/',function (){
    return view('index');
 });
 
 
-// admin routes
-
-Route::middleware('admin')->group(function () {
-    Route::resource('category', CategoryController::class)->only('create','store','edit','update','destroy');
-    Route::resource('education', EducationController::class)->only('create','store','edit','update');
-    Route::resource('experience', ExperienceController::class)->only('create','store','edit','update');
-    Route::resource('contact', ContactController::class)->only('index','show','destroy');
-
-    Route::resource('user', UserController::class);
-});
-
-
-// authenticated routes
 Route::middleware('auth')->group(function () {
 
     Route::get('welcome', [HomeController::class, 'index'])->name('welcome.index'); //last authenticated user
 
-    Route::resource('education', EducationController::class)->only('index');
+    Route::resource('education', EducationController::class);
+
+    Route::resource('experience', ExperienceController::class);
 
     Route::resource('project', ProjectController::class);
 
-    Route::resource('service', ServiceController::class);
-
-    Route::get('contact', [ContactController::class, 'create'])->name('contact.create');
-
-    Route::post('contact', [ContactController::class, 'store']);
 
     Route::resource('testimonial', TestimonialController::class);
 
-    Route::resource('category', CategoryController::class)->only('index','show');
+    Route::resource('service', ServiceController::class);
 
     Route::get('skill/create', [SkillController::class,'create']);
     Route::post('skill', [SkillController::class,'store']);
     Route::get('skill/{skill}/edit', [SkillController::class,'edit']);
     Route::patch('skill/{skill}', [SkillController::class,'update']);
+
+    Route::resource('user', UserController::class);
+
+    /*Route::get('user', [UserController::class,'index'])->name('user.index');
+    Route::get('user/{user}/edit', [UserController::class,'edit'])->name('user.edit');
+    Route::patch('user/{user}', [UserController::class,'update'])->name('user.update');*/
+
+    Route::get('category', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('category/{category:name}', [CategoryController::class, 'show'])->name('category.show');
+
+    Route::get('contact', [ContactController::class, 'create'])->name('contact.create');
+    Route::post('contact', [ContactController::class, 'store']);
+
 });
-
-
-
 
 Auth::routes();
 

@@ -34,7 +34,7 @@ class ProjectControllerTest extends TestCase
 
     /** @test */
 
-    public function test_only_authenticated_users_can_add_projects()
+    public function only_authenticated_users_can_add_projects()
     {
         $user = User::factory()->create();
         $category = Category::factory()->create();

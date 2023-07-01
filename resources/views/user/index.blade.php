@@ -40,10 +40,10 @@
                             <div class="author-desc">
                                 <p><b>Date of birth:</b> {{ $lastAuthenticatedUser->date_of_birth }} </p>
 
-                                <p><b>Language:</b> {{ implode(', ', $lastAuthenticatedUser->speeches) }}</p>
+                                <p><b>Language : </b> {{ implode(', ', explode(', ', $lastAuthenticatedUser->speeches)) }}</p>
 
 
-                                    <p> <b>Expert in:</b>{{ implode(', ', $lastAuthenticatedUser->expert_in) }}</p>
+                                <p><b>Expert in : </b> {{ implode(', ', explode(', ', $lastAuthenticatedUser->expert_in)) }}</p>
 
 
                                 <p><b>Freelance:</b> {{ $lastAuthenticatedUser->freelance }}</p>

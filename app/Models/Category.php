@@ -16,8 +16,5 @@ class Category extends Model
     {
         return $this->hasMany(Project::class);
     }
-    public function getRouteKey(): string
-    {
-        return 'name';
-    }
+
 }

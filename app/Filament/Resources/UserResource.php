@@ -51,9 +51,6 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('excerpt'),
                 Tables\Columns\TextColumn::make('projects.name')->label('Project Name'),
 
-
-
-
             ])
             ->filters([
                 // your filters here

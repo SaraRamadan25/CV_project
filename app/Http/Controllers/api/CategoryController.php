@@ -24,11 +24,46 @@ class CategoryController extends Controller
 
     #[Pure] public function show(Category $category): CategoryResource
     {
-         return new CategoryResource($category);
+        return new CategoryResource($category);
+    }
+
+    public function create(): Response|Application|ResponseFactory
+    {
+        if (auth()->user()?->name == 'admin') {
+            return response('category created successfully', 201);
+        }
+        return response('Not Allowed', 403);
+    }
+
+    public function store(Request $request): JsonResponse
+    {
+        if (auth()->user()?->name == 'admin') {
+            $data = $request->validate([
+                'name' => 'required',
+            ]);
+            Category::create($data);
+            return response()->json(['msg' => 'category created successfully'], 201);
+        }
+        return response()->json(['msg' => 'Not Allowed'], 403);
     }
 
 
+    public function update(Request $request, Category $category): JsonResponse
+    {
+        {
+            $data = $request->validate([
+                'name' => 'required',
+            ]);
 
+            $category->update($data);
+            return response()->json(['msg' => 'category updated successfully'], 200);
+        }
+    }
 
-
+    public function destroy(Category $category): JsonResponse
+    {
+        $category->projects()->delete();
+        $category->delete();
+        return response()->json(['msg' => 'category & its projects deleted successfully'], 200);
+    }
 }

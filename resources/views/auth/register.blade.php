@@ -57,11 +57,14 @@
                         <div class="row mb-3">
                             <label for="speeches">Speeches</label>
                             <select id="speeches" name="speeches[]" multiple>
-                                @foreach ($speeches as $speech)
+                                @forelse ($speeches as $speech)
                                     <option value="{{ $speech }}">{{ $speech }}</option>
-                                @endforeach
+                                @empty
+                                    <option value="" disabled>No speeches available</option>
+                                @endforelse
                             </select>
                         </div>
+
 
 
                         <div class="row mb-3">

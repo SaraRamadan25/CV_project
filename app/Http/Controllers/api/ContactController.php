@@ -22,10 +22,21 @@ class ContactController extends Controller
         return response()->json(['message' => 'Contact created successfully']);
     }
 
-    public function update(ContactRequest $request, Contact $contact): JsonResponse
+    public function index(): AnonymousResourceCollection
     {
-         $contact->update($request->validated());
-        return response()->json(['message' => 'Contact updated successfully']);
+        $contacts = Contact::paginate(4);
+        return ContactResource::collection($contacts);
     }
+
+    #[Pure] public function show(Contact $contact): ContactResource
+    {
+        return new ContactResource($contact);
+    }
+    public function destroy(Contact $contact): JsonResponse
+    {
+        $contact->delete();
+        return response()->json(['message' => 'Contact deleted successfully']);
+    }
+
 
 }
