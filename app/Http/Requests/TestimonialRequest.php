@@ -24,11 +24,11 @@ class TestimonialRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required| max:255',
-            'role'=>'required',
-            'image' =>'file|mimes:jpg,jpeg,png',
-            'description'=>'required',
-            'user_id'=>'integer'
+            'name' => 'required|max:255',
+            'role' => 'required',
+            'image' => 'file|mimes:jpg,jpeg,png',
+            'description' => 'required',
+            'user_id' => 'integer'
         ];
     }
 }

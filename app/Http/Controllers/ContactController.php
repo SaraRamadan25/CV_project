@@ -17,22 +17,22 @@ class ContactController extends Controller
     {
         return view('contact.create');
     }
+
     public function store(ContactRequest $request): Redirector|Application|RedirectResponse
     {
-           Contact::create($request->validated());
+        Contact::create($request->validated());
         return redirect('contact.create');
     }
 
-    // admin routes
     public function index(): Factory|View|Application
     {
         $contacts = Contact::paginate(5);
-        return view('contact.index',compact('contacts'));
+        return view('contact.index', compact('contacts'));
     }
 
     public function show(Contact $contact): Factory|View|Application
     {
-        return view('contact.show',compact('contact'));
+        return view('contact.show', compact('contact'));
     }
 
     public function destroy(Contact $contact): Redirector|Application|RedirectResponse

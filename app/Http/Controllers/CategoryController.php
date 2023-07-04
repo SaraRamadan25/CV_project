@@ -16,22 +16,22 @@ class CategoryController extends Controller
         $categories = Category::all();
         $projects = Project::all();
 
-        return view('category.index',compact('categories','projects'));
+        return view('category.index', compact('categories', 'projects'));
     }
 
-        public function show(Category $category): Factory|View
-        {
+    public function show(Category $category): Factory|View
+    {
         $projects = $category->projects;
 
         return view('category.show', compact('category', 'projects'));
     }
 
-    //admin methods
 
     public function create(): Factory|View|Application
     {
         return view('category.create');
     }
+
     public function store(): RedirectResponse
     {
         $data = request()->validate([
@@ -52,7 +52,7 @@ class CategoryController extends Controller
             'name' => 'required',
         ]);
         $category->update($data);
-        
+
         return redirect()->route('category.index')->with('msg', 'Category updated successfully');
     }
 
