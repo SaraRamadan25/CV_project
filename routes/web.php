@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TestimonialController;
@@ -24,8 +24,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',function (){
-   return view('index');
+Route::get('/', function () {
+    return view('index');
 });
 
 
@@ -38,18 +38,17 @@ Route::middleware('auth')->group(function () {
     Route::resource('experience', ExperienceController::class);
 
     Route::resource('project', ProjectController::class);
-
-
+    
     Route::resource('testimonial', TestimonialController::class);
 
     Route::resource('service', ServiceController::class);
 
-    Route::get('skill/create', [SkillController::class,'create']);
-    Route::post('skill', [SkillController::class,'store']);
-    Route::get('skill/{skill}/edit', [SkillController::class,'edit']);
-    Route::patch('skill/{skill}', [SkillController::class,'update']);
+    Route::get('skill/create', [SkillController::class, 'create']);
+    Route::post('skill', [SkillController::class, 'store']);
+    Route::get('skill/{skill}/edit', [SkillController::class, 'edit']);
+    Route::patch('skill/{skill}', [SkillController::class, 'update']);
 
-    Route::resource('user', UserController::class);
+    Route::get('/users/{user:username}', [UserController::class, 'show'])->name('user.show');
 
     /*Route::get('user', [UserController::class,'index'])->name('user.index');
     Route::get('user/{user}/edit', [UserController::class,'edit'])->name('user.edit');

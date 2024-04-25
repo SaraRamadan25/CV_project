@@ -20,16 +20,16 @@ class UserController extends Controller
 
         $skills = $lastAuthenticatedUser->skills;
 
-        return view('user.index',compact('lastAuthenticatedUser','skills'));
+        return view('user.index', compact('lastAuthenticatedUser', 'skills'));
     }
 
     public function create(): Factory|View|Application
     {
-        $speeches =['Arabic','English','German','Spanish','French'];
-        $expert_in =['UI/UX','Frontend','Backend','Datascience','Data Analysis'];
+        $speeches = ['Arabic', 'English', 'German', 'Spanish', 'French'];
+        $expert_in = ['UI/UX', 'Frontend', 'Backend', 'Datascience', 'Data Analysis'];
         $educations = Education::all();
-        $experiences= Experience::all();
-        return view('user.create',compact('speeches','experiences','expert_in','educations'));
+        $experiences = Experience::all();
+        return view('user.create', compact('speeches', 'experiences', 'expert_in', 'educations'));
     }
 
     public function store(UserRequest $request): RedirectResponse
@@ -37,31 +37,31 @@ class UserController extends Controller
         $img = $request->file('image');
         $ext = $img->getClientOriginalExtension();
         $image_name = "testimonial-$request->id.$ext";
-        $img->move(public_path('storage/app/uploadedPhotos'),$image_name);
+        $img->move(public_path('storage/app/uploadedPhotos'), $image_name);
 
-        User::create($request->validated() + ['image'=>$image_name]);
+        $userData = array_merge($request->validated(), ['image' => $image_name]);
+        $userData['freelance'] = $request->has('freelance') ? 1 : 0;
+
+        User::create($userData);
 
         $user = Auth::user();
-        $user->educations()
-            ->sync
-            (request('education_id'));
+        $user->educations()->sync(request('education_id'));
+        $user->experiences()->sync(request('experience_id'));
 
-        $user->experiences()
-            ->sync
-            (request('experience_id'));
-        return redirect()->route('user.index')->with('msg','user created successfully');
-
+        return redirect()->route('user.index')->with('msg', 'User created successfully');
     }
+
     public function edit(User $user): Factory|View|Application
     {
         $educations = Education::all();
-        $speeches =['Arabic','English','German','Spanish','French'];
-        $expert_in =['UI/UX','Frontend','Backend','Datascience','Data Analysis'];
+        $speeches = ['Arabic', 'English', 'German', 'Spanish', 'French'];
+        $expert_in = ['UI/UX', 'Frontend', 'Backend', 'Datascience', 'Data Analysis'];
 
-        return view('user.edit',compact('speeches','expert_in','user','educations'));
+        return view('user.edit', compact('speeches', 'expert_in', 'user', 'educations'));
 
     }
-    public function update(UserRequest $request,User $user): RedirectResponse
+
+    public function update(UserRequest $request, User $user): RedirectResponse
     {
         $data = $request->validated();
 
@@ -71,7 +71,11 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('user.index')->with('msg','user updated successfully');
+        return redirect()->route('user.index')->with('msg', 'user updated successfully');
     }
 
+    public function show(User $user)
+    {
+        return view('user.show', compact('user'));
+    }
 }

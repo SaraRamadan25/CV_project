@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Exception;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -63,8 +62,8 @@ class RegisterController extends Controller
     public function showRegistrationForm(): Factory|View|Application
     {
         $data = [
-            'speeches' => ['Arabic','English','German','Spanish','French'],
-            'expert_in' =>['UI/UX','Frontend','Backend','Datascience','Data Analysis']
+            'speeches' => ['Arabic', 'English', 'German', 'Spanish', 'French'],
+            'expert_in' => ['UI/UX', 'Frontend', 'Backend', 'Datascience', 'Data Analysis']
 
         ];
 
@@ -85,13 +84,14 @@ class RegisterController extends Controller
 
             'name' => $data['name'],
             'email' => $data['email'],
+            'username' => $data['username'],
             'password' => Hash::make($data['password']),
-            'date_of_birth'=>$data['date_of_birth'],
-            'description'=>$data['description'],
-            'freelance'=>$data['freelance'],
-            'excerpt'=>$data['excerpt'],
-            'speeches'=>$data['speeches'],
-            'expert_in'=>$data['expert_in'],
+            'date_of_birth' => $data['date_of_birth'],
+            'description' => $data['description'],
+            'freelance' => $data['freelance'],
+            'excerpt' => $data['excerpt'],
+            'speeches' => $data['speeches'],
+            'expert_in' => $data['expert_in'],
             'image' => $imagePath
 
         ]);

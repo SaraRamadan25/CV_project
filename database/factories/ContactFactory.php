@@ -18,9 +18,9 @@ class ContactFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'email'=>fake()->email(),
-            'title'=>fake()->sentence(),
-            'message'=>fake()->sentence(2)
+            'email' => fake()->email(),
+            'title' => fake()->title(),
+            'message' => fake()->sentence(2),
         ];
     }
 }
