@@ -31,7 +31,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('welcome', [HomeController::class, 'index'])->name('welcome.index'); //last authenticated user
+    Route::get('welcome', [HomeController::class, 'index'])->name('welcome.index'); 
 
     Route::resource('education', EducationController::class);
 
